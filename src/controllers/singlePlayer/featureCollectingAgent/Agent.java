@@ -8,9 +8,8 @@ import ontology.Types;
 import tools.ElapsedCpuTimer;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
+import java.util.List;
 
 
 /**
@@ -20,7 +19,10 @@ public class Agent extends AbstractPlayer {
 
     public int num_actions;
     public Types.ACTIONS[] actions;
+
+    // Features of a game, used for training set
     private HashMap<String, Double> features = new HashMap<>();
+    private Random random;
 
     // Use MCTS for feature collection
     private SingleMCTSPlayer mctsPlayer;
@@ -32,8 +34,9 @@ public class Agent extends AbstractPlayer {
      */
     public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer)
     {
+	random = new Random();
 	//Get the actions in a static array.
-	ArrayList<Types.ACTIONS> act = so.getAvailableActions();
+	List<Types.ACTIONS> act = so.getAvailableActions();
 	actions = new Types.ACTIONS[act.size()];
 	for(int i = 0; i < actions.length; ++i)
 	{
@@ -41,7 +44,7 @@ public class Agent extends AbstractPlayer {
 	}
 	num_actions = actions.length;
 
-	//Create the player.
+	//Create the player for simulation for feature collection
 	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
 
 	//Collect features
@@ -50,6 +53,29 @@ public class Agent extends AbstractPlayer {
 	int blockSize = so.getBlockSize();
 	features.put("worldSize", size);
 	features.put("blockSize", blockSize+0.0);
+	mctsPlayer.init(so);
+	while (elapsedTimer.elapsedMillis() < 500){
+	    so.advance(actions[mctsPlayer.run(elapsedTimer)]);
+	    if (elapsedTimer.elapsedMillis() % 50 == 0){
+		Map<Integer, Integer> avatarResources = so.getAvatarResources();
+		ArrayList<Observation>[] resources = so.getResourcesPositions();
+		if (resources != null){
+		    int numTypesResources = resources.length;
+		    double isResourcesAvailable = numTypesResources == 0 ?
+						  0.0 : 1.0;
+		    features.put("numTypesResources", numTypesResources+0.0);
+		    features.put("isResourcesAvailable", isResourcesAvailable);
+		}
+		int numTypesResourcesAvatar = avatarResources.size();
+		double avatarHasResources = numTypesResourcesAvatar == 0 ?
+					    0.0 : 1.0;
+		features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
+		features.put("avatarHasResources", avatarHasResources);
+	    }
+	}
+	System.out.println(features.toString());
+	// Create a fresh player to use to play the game for further feature collection
+	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
     }
 
     /**
@@ -65,7 +91,7 @@ public class Agent extends AbstractPlayer {
 
 	//Determine the action using MCTS...
 	int action = mctsPlayer.run(elapsedTimer);
-
+	
 	//... and return it.
 	return actions[action];
     }
