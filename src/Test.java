@@ -26,7 +26,7 @@ public class Test
         String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
 
 	// Our agent that is used to collect features and save them
-	String featureCollectingController = "controllers.singePlayer.featureCollectingAgent.Agent";
+	String featureCollectingController = "controllers.singlePlayer.featureCollectingAgent.Agent";
 
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
@@ -66,7 +66,7 @@ public class Test
 
         //Game and level to play
 
-        int gameIdx = 1;
+        int gameIdx = 0;
         int levelIdx = 4; //level names from 0 to 4 (game_lvlN.txt).
 
         String game = gamesPath + games[gameIdx] + ".txt";

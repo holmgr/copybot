@@ -2,6 +2,7 @@ package controllers.singlePlayer.featureCollectingAgent;
 
 import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import core.game.*;
+import core.game.Event;
 import core.player.AbstractPlayer;
 import ontology.Types;
 import ontology.Types.ACTIONS;
@@ -13,8 +14,6 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import java.awt.Event;
-import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -29,11 +28,10 @@ import java.util.TreeSet;
 public class Agent extends AbstractPlayer {
 
     public int num_actions;
-    public Types.ACTIONS[] actions;
+    public ACTIONS[] actions;
     // Features of a game, used for training set
     private HashMap<String, Double> features = new HashMap<>();
-    private Random random;
-    private core.game.Event lastEvent = new core.game.Event(-1,false,0,0,0,0,new Vector2d());
+    private Event lastEvent = null;
     private boolean firstRun = true;
     private int canShoot = 0;
 
@@ -48,11 +46,9 @@ public class Agent extends AbstractPlayer {
      */
     public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer)
     {
-	random = new Random();
 	//Get the actions in a static array.
-
-	List<Types.ACTIONS> act = so.getAvailableActions();
-	actions = new Types.ACTIONS[act.size()];
+	List<ACTIONS> act = so.getAvailableActions();
+	actions = new ACTIONS[act.size()];
 
 	for(int i = 0; i < actions.length; ++i)
 	{
@@ -62,6 +58,9 @@ public class Agent extends AbstractPlayer {
 
 	//Create the player for simulation for feature collection
 	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
+
+	//Init some features
+	initFeatures();
 
 	//Collect features
 	Dimension dim = so.getWorldDimension();
@@ -73,43 +72,24 @@ public class Agent extends AbstractPlayer {
 	//Are different actions available
 	if(act.contains(ACTIONS.ACTION_DOWN) && act.contains(ACTIONS.ACTION_UP)){
 	    canMoveVertically = 1;
-    	 }
-     	if(act.contains(ACTIONS.ACTION_USE)) {
+	}
+	if(act.contains(ACTIONS.ACTION_USE)) {
 	    isUseAvailable = 1;
 	}
-
-
-
-
 	features.put("isUseAvailable", isUseAvailable+0.0);
 	features.put("canMoveVertically", canMoveVertically +0.0);
 	features.put("worldSize", size);
 	features.put("blockSize", blockSize+0.0);
 
 	mctsPlayer.init(so);
-	while (elapsedTimer.elapsedMillis() < 500){
+	while (elapsedTimer.elapsedMillis() < 6000){
 	    so.advance(actions[mctsPlayer.run(elapsedTimer)]);
-	    if (elapsedTimer.elapsedMillis() % 50 == 0){
-		Map<Integer, Integer> avatarResources = so.getAvatarResources();
-		ArrayList<Observation>[] resources = so.getResourcesPositions();
-		if (resources != null){
-		    int numTypesResources = resources.length;
-		    double isResourcesAvailable = numTypesResources == 0 ?
-						  0.0 : 1.0;
-		    features.put("numTypesResources", numTypesResources+0.0);
-		    features.put("isResourcesAvailable", isResourcesAvailable);
-		}
-		int numTypesResourcesAvatar = avatarResources.size();
-		double avatarHasResources = numTypesResourcesAvatar == 0 ?
-					    0.0 : 1.0;
-		features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
-		features.put("avatarHasResources", avatarHasResources);
-	    }
+	    detectFeatures(so);
+
 	}
 	System.out.println(features.toString());
 	// Create a fresh player to use to play the game for further feature collection
 	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
-        detectFeatures(so);
     }
 
     /**
@@ -127,42 +107,8 @@ public class Agent extends AbstractPlayer {
 	//Determine the action using MCTS...
 	int action = mctsPlayer.run(elapsedTimer);
 
-	if (canShoot == 0) {
-	    isShootAvailable(stateObs);
-	}
-
-
-        detectFeatures(stateObs);
-
-        //... and return it.
-        return actions[action];
-    }
-
-    private void isShootAvailable(final StateObservation stateObs) {
-
-	    TreeSet<core.game.Event> events = stateObs.getEventsHistory();
-
-	    if (firstRun && events.size() > 0) {
-		for (core.game.Event event : events) {
-		    lastEvent = event;
-		    if (event.fromAvatar) {
-			canShoot = 1;
-			break;
-		    }
-		}
-		firstRun = false;
-	    } else if (events.size() > 0) {
-		SortedSet<core.game.Event> newEvents = events.tailSet(lastEvent);
-		for (core.game.Event event : newEvents) {
-		    lastEvent = event;
-		    if (event.fromAvatar) {
-			canShoot = 1;
-			break;
-		    }
-
-	    }
-	    features.put("canShoot", canShoot+0.0);
-	}
+	//... and return it.
+	return actions[action];
     }
 
     /**
@@ -174,50 +120,137 @@ public class Agent extends AbstractPlayer {
     public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
     {
 //        System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
-        //Include your code here to know how it all ended.
-        //System.out.println("Game over? " + stateObservation.isGameOver());
+	//Include your code here to know how it all ended.
+	//System.out.println("Game over? " + stateObservation.isGameOver());
+    }
+
+    private void initFeatures(){
+	features.put("numNPCTypes", 0.0);
+	features.put("numNPC", 0.0);
+	features.put("numImmovableSprites", 0.0);
+	features.put("numMovableSprites", 0.0);
+	features.put("numPlayerSprites", 0.0);
+	features.put("numPortals", 0.0);
+	features.put("numPortalTypes", 0.0);
     }
 
     private void detectFeatures(StateObservation stateObs){
-        double numPortals = 0.0;
-        double numPortalTypes = 0.0;
-        double numNPC = 0.0;
-        double numNPCTypes = 0.0;
-        double numImmovableSprites = 0.0;
-        double numMovableSprites = 0.0;
-        double numPlayerSprites = 0.0;
+	ArrayList<Observation>[] portalTypes = stateObs.getPortalsPositions();
+	detectPortalFeatures(portalTypes);
+	ArrayList<Observation>[] NPCTypes = stateObs.getNPCPositions();
+	detectNPCFeatures(NPCTypes);
+	ArrayList<Observation>[] immovableTypes = stateObs.getImmovablePositions();
+	ArrayList<Observation>[] movableTypes = stateObs.getMovablePositions();
+	ArrayList<Observation>[] spritesTypesByPlayer = stateObs.getFromAvatarSpritesPositions();
+	detectSpriteFeatures(immovableTypes, movableTypes, spritesTypesByPlayer);
 
-        // Get the number of Portal types and the total number of portals.
-        ArrayList<Observation>[] portalTypes = stateObs.getPortalsPositions();
-        if (portalTypes != null) {
-            numPortalTypes = portalTypes.length;
-            for (ArrayList<Observation> portalType : portalTypes) numPortals += portalType.size();
-        }
-        features.put("numPortals", numPortals);
-        features.put("numPortalTypes", numPortalTypes);
+	Map<Integer, Integer> avatarResources = stateObs.getAvatarResources();
+	ArrayList<Observation>[] resources = stateObs.getResourcesPositions();
+	detectResourceFeatures(resources, avatarResources);
 
-        // Get the number of NPC types and the total number of NPC in the game.
-        ArrayList<Observation>[] NPCTypes = stateObs.getNPCPositions();
-        if (NPCTypes != null) {
-            numNPCTypes = NPCTypes.length;
-            for (ArrayList<Observation> NPCType : NPCTypes) numNPC += NPCType.size();
-        }
-        features.put("numNPC", numNPC);
-        features.put("numNPCTypes", numNPCTypes);
+	Set<Event> events = stateObs.getEventsHistory();
+	if (canShoot == 0) {
+	    tryDetectShootFeature(events);
+	}
+    }
 
-        // Get the number if types of immovable sprites.
-        ArrayList<Observation>[] immovableTypes = stateObs.getImmovablePositions();
-        if (immovableTypes != null) numImmovableSprites = immovableTypes.length;
-        features.put("numImmovableSprites", numImmovableSprites);
+    /**
+     * Get the number of Portal types and the total number of portals.
+     *
+     */
+    private void detectPortalFeatures(List<Observation>[] portalTypes) {
+	double numPortals = 0.0;
+	double numPortalTypes = 0.0;
 
-        // Get the number of types of movable sprites (NOT NPC).
-        ArrayList<Observation>[] movableTypes = stateObs.getMovablePositions();
-        if (movableTypes != null) numMovableSprites = movableTypes.length;
-        features.put("numMovableSprites", numMovableSprites);
+	if (portalTypes != null) {
+	    numPortalTypes = portalTypes.length;
+	    for (List<Observation> portalType : portalTypes) numPortals += portalType.size();
+	}
+	if(numPortals > features.get("numPortals")){
+	    features.put("numPortals", numPortals);
+	}
+	if(numPortalTypes > features.get("numPortalTypes")){
+	    features.put("numPortalTypes", numPortalTypes);
+	}
+    }
 
-        // Get the number of types of sprites that are created by the player.
-        ArrayList<Observation>[] spritesTypesByPlayer = stateObs.getFromAvatarSpritesPositions();
-        if (spritesTypesByPlayer != null) numPlayerSprites = spritesTypesByPlayer.length;
-        features.put("numPlayerSprites", numPlayerSprites);
+    /**
+     * Get the number of NPC types and the total number of NPC in the game.
+     */
+    private void detectNPCFeatures(List<Observation>[] NPCTypes) {
+	double numNPC = 0.0;
+	double numNPCTypes = 0.0;
+
+	if (NPCTypes != null) {
+	    numNPCTypes = NPCTypes.length;
+	    for (List<Observation> NPCType : NPCTypes) numNPC += NPCType.size();
+	}
+	if(numNPC > features.get("numNPC")){
+	    features.put("numNPC", numNPC);
+	}
+	if(numNPCTypes > features.get("numNPCTypes")){
+	    features.put("numNPCTypes", numNPCTypes);
+	}
+    }
+
+    private void detectSpriteFeatures(List<Observation>[] immovableTypes, List<Observation>[] movableTypes,
+				      List<Observation>[] spritesTypesByPlayer) {
+	double numImmovableSprites = 0.0;
+	double numMovableSprites = 0.0;
+	double numPlayerSprites = 0.0;
+
+	// Get the number if types of immovable sprites.
+	if (immovableTypes != null) numImmovableSprites = immovableTypes.length;
+	if(numImmovableSprites > features.get("numImmovableSprites")) {
+	    features.put("numImmovableSprites", numImmovableSprites);
+	}
+
+	// Get the number of types of movable sprites (NOT NPC).
+	if (movableTypes != null) numMovableSprites = movableTypes.length;
+	if(numMovableSprites > features.get("numMovableSprites")){
+	    features.put("numMovableSprites", numMovableSprites);
+	}
+
+	// Get the number of types of sprites that are created by the player.
+	if (spritesTypesByPlayer != null) numPlayerSprites = spritesTypesByPlayer.length;
+	if(numPlayerSprites > features.get("numPlayerSprites")){
+	    features.put("numPlayerSprites", numPlayerSprites);
+	}
+    }
+
+    private void detectResourceFeatures(List<Observation>[] resources, Map<Integer, Integer> avatarResources ) {
+	if (resources != null){
+	    int numTypesResources = resources.length;
+	    double isResourcesAvailable = numTypesResources == 0 ?
+					  0.0 : 1.0;
+	    features.put("numTypesResources", numTypesResources+0.0);
+	    features.put("isResourcesAvailable", isResourcesAvailable);
+	}
+	int numTypesResourcesAvatar = avatarResources.size();
+	double avatarHasResources = numTypesResourcesAvatar == 0 ?
+				    0.0 : 1.0;
+	features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
+	features.put("avatarHasResources", avatarHasResources);
+    }
+
+    private void tryDetectShootFeature(Set<Event> events) {
+	if (firstRun && !events.isEmpty()) {
+	    checkEventsForCollision(events);
+	    firstRun = false;
+	} else if (!events.isEmpty()) {
+	    SortedSet<Event> newEvents = ((TreeSet)events).tailSet(lastEvent);
+	    checkEventsForCollision(newEvents);
+	}
+	features.put("canShoot", canShoot+0.0);
+    }
+
+    private void checkEventsForCollision(Set<Event> events){
+	for (Event event : events) {
+	    lastEvent = event;
+	    if (event.fromAvatar) {
+		canShoot = 1;
+		break;
+	    }
+	}
     }
 }
