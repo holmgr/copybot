@@ -2,7 +2,9 @@ package controllers.singlePlayer.sampleMCTS;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.TreeSet;
 
+import core.game.Event;
 import core.game.Observation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
@@ -41,6 +43,14 @@ public class Agent extends AbstractPlayer {
             actions[i] = act.get(i);
         }
         num_actions = actions.length;
+
+    //    int N  = 200;
+     //   while(N > 0) {
+     //       so.advance(actions[0]);
+//
+  //          N--;
+    //    }
+      //  TreeSet<Event> test = so.getEventsHistory();
 
         //Create the player.
         mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
