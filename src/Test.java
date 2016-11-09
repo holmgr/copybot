@@ -1,6 +1,9 @@
+
+import java.util.ArrayList;
 import java.util.Random;
 
 import core.ArcadeMachine;
+import tools.StatSummary;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,9 +12,35 @@ import core.ArcadeMachine;
  * Time: 16:29
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
+
+class result
+{
+    private int game;
+    private int level;
+    private int timeStamp;
+    private int win;
+    private double score;
+    private String controller;
+
+    public result(final int game, final int level, final int timeStamp, final int win, final double score,
+                  final String controller)
+    {
+        this.game = game;
+        this.level = level;
+        this.timeStamp = timeStamp;
+        this.win = win;
+        this.score = score;
+        this.controller = controller;
+    }
+}
+
+
 public class Test
 {
-
+    public static ArrayList<Integer> gameToController = new ArrayList<>();
+    public static void manipArray() {
+        gameToController.add(2);
+    }
     public static void main(String[] args)
     {
         //Available controllers:
@@ -79,7 +108,7 @@ public class Test
     //    ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
         
         // 2. This plays a game in a level by the controller.
-        ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
+        //ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
 
         // 3. This replays a game from an action file previously recorded
         //String readActionsFile = recordActionsFile;
@@ -100,21 +129,34 @@ public class Test
         //	ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
         //}
         
-        //6. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
-//        int N = 82, L = 5, M = 1;
-//        boolean saveActions = false;
-//        String[] levels = new String[L];
-//        String[] actionFiles = new String[L*M];
-//        for(int i = 0; i < N; ++i)
-//        {
-//            int actionIdx = 0;
-//            game = gamesPath + games[i] + ".txt";
-//            for(int j = 0; j < L; ++j){
-//                levels[j] = gamesPath + games[i] + "_lvl" + j +".txt";
-//                if(saveActions) for(int k = 0; k < M; ++k)
-//                    actionFiles[actionIdx++] = "actions_game_" + i + "_level_" + j + "_" + k + ".txt";
-//            }
-//            ArcadeMachine.runGames(game, levels, M, sampleMCTSController, saveActions? actionFiles:null);
-//        }
+     //   6. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
+        String currController = "";
+        boolean firstRun = true;
+        String[] controllers = {"sampleMCTSController", "sampleOLMCTSController", "sampleGAController"};
+        for (int z = 0; z <controllers.length; z++) {
+            currController = controllers[z];
+
+
+            int N = 2, L = 2, M = 1;
+            boolean saveActions = false;
+            String[] levels = new String[L];
+            String[] actionFiles = new String[L * M];
+            for (int i = 0; i < N; ++i) {
+                int actionIdx = 0;
+                game = gamesPath + games[i] + ".txt";
+                for (int j = 0; j < L; ++j) {
+                    levels[j] = gamesPath + games[i] + "_lvl" + j + ".txt";
+                    ArcadeMachine.runOneGame(game, levels[j], false, currController, null, seed, 0);
+                    System.out.println("wins: " + core.game.Game.win + " points: " + core.game.Game.score + " Timestamp: " +
+                                       core.game.Game.time);
+
+                    result curr = new result(i, j, core.game.Game.time, core.game.Game.win, core.game.Game.score, currController);
+
+
+                        if (saveActions) for (int k = 0; k < M; ++k)
+                            actionFiles[actionIdx++] = "actions_game_" + i + "_level_" + j + "_" + k + ".txt";
+                }
+            }
+        }
     }
 }

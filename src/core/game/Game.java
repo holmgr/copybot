@@ -30,6 +30,7 @@ import tools.*;
 import tools.pathfinder.Node;
 import tools.pathfinder.PathFinder;
 
+; // imports all static members
 
 /**
  * Created with IntelliJ IDEA.
@@ -1074,17 +1075,22 @@ public abstract class Game
      * Prints the result of the game, indicating the winner, the score and the
      * number of game ticks played, in this order.
      */
+    public static int win;
+    public static double score;
+    public static int time;
     public void printResult()
     {
-        String sb1 = "";
-        String sb2 = "";
+
+
         for (int i = 0; i < no_players; i++) {
-            sb1 += "Player" + i + ":" + avatars[i].getWinState().key() + ", ";
-            sb2 += "Player" + i + "-Score:" + avatars[i].getScore() + ", ";
+            win = avatars[i].getWinState().key();
+            score = avatars[i].getScore();
+            time = this.getGameTick();
         }
 
-        System.out.println("Result (1->win; 0->lose): " + sb1 + sb2 + "timesteps:" + this.getGameTick());
+        System.out.println("Result (1->win; 0->lose): " + win + score + "timesteps:" + this.getGameTick());
         //System.out.println("Result (1->win; 0->lose):"+ winner.key() + ", Score:" + score + ", timesteps:" + this.getGameTick());
+
     }
 
     /**
