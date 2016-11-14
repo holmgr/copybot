@@ -146,11 +146,12 @@ public class Test
                 game = gamesPath + games[i] + ".txt";
                 for (int j = 0; j < L; ++j) {
                     levels[j] = gamesPath + games[i] + "_lvl" + j + ".txt";
-                    ArcadeMachine.runOneGame(game, levels[j], false, currController, null, seed, 0);
-                    System.out.println("wins: " + core.game.Game.win + " points: " + core.game.Game.score + " Timestamp: " +
-                                       core.game.Game.time);
-
-                    result curr = new result(i, j, core.game.Game.time, core.game.Game.win, core.game.Game.score, currController);
+                    double[] test = ArcadeMachine.runOneGame(game, levels[j], false, sampleMCTSController, null, seed, 0);
+                    for (int k = 0; k < test.length; k++) {
+                        double win = test[0];
+                        double score = test[1];
+                        double timesteps = test[2];
+                    }
 
 
                         if (saveActions) for (int k = 0; k < M; ++k)
