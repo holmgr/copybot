@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Random;
 
 import core.ArcadeMachine;
@@ -74,7 +75,8 @@ public class Test
         String recordLevelFile = generateLevelPath + games[gameIdx] + "_glvl.txt";
         String recordActionsFile = null;//"actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
 
-	for (int i = 0; i < 20; i++){
+	// Loop to collect features of 80 games, using 5 levels each
+	for (int i = 0; i < 80; i++){
 	    String gameToPlay = gamesPath + games[i] + ".txt";
 	    for (int j = 0; j < 5; j++){
 		String levelToPlay = gamesPath + games[i] + "_lvl" + j + ".txt";

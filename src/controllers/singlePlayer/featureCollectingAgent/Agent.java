@@ -28,12 +28,10 @@ import java.util.TreeSet;
  * Agent 007
  */
 public class Agent extends AbstractPlayer {
-    private static final int BLOCKSIZE_2ND_CLASS_LOWER_LIMIT = 40;
-    private static final int WORLDSIZE_2ND_CLASS_LOWER_LIMIT = 30000;
     public int num_actions;
     public ACTIONS[] actions;
     // Features of a game, used for training set
-    private HashMap<String, Double> features = new HashMap<>();
+    private static HashMap<String, Double> features = new HashMap<>();
     private Event lastEvent = null;
     private boolean firstRun = true;
     private int canShoot = 0;
@@ -48,6 +46,13 @@ public class Agent extends AbstractPlayer {
     private static final int NUM_NPC_3RD_CLASS_LOW_LIMIT = 11;
     private static final int NUM_NPCTYPES_3RD_CLASS_LOW_LIMIT = 4;
     private static final int NUM_TYPES_RESOURCES_3RD_CLASS_LOW_LIMIT = 4;
+    private static final int BLOCKSIZE_2ND_CLASS_LOWER_LIMIT = 40;
+    private static final int WORLDSIZE_2ND_CLASS_LOWER_LIMIT = 30000;
+    private static final int NUM_PORTALS_3RD_CLASS_LOW_LIMIT = 2;
+    private static final int NUM_PORTALTYPES_3RD_CLASS_LOW_LIMIT = 2;
+    private static final int NUM_IMMOV_SPRITES_2ND_CLASS_LOW_LIMIT = 3;
+    private static final int NUM_MOV_SPRITES_2ND_CLASS_LOW_LIMIT = 3;
+    private static final int NUM_PLAYER_SPRITES_2ND_CLASS_LOW_LIMIT = 1;
 
     /**
      * Public constructor with state observation and time due.
@@ -167,6 +172,8 @@ public class Agent extends AbstractPlayer {
 	features.put("numPortalTypes", 0.0);
 	features.put("numTypesResources", 0.0);
 	features.put("isResourcesAvailable", 0.0);
+	features.put("numTypesResourcesAvatar", 0.0);
+	features.put("avatarHasResources", 0.0);
     }
 
     /**
@@ -197,18 +204,34 @@ public class Agent extends AbstractPlayer {
      * Analyze the number of Portal types and the total number of portals.
      */
     private void detectPortalFeatures(List<Observation>[] portalTypes) {
-	double numPortals = 0.0;
-	double numPortalTypes = 0.0;
+	int numPortals = 0;
+	int numPortalTypes = 0;
 
 	if (portalTypes != null) {
 	    numPortalTypes = portalTypes.length;
 	    for (List<Observation> portalType : portalTypes) numPortals += portalType.size();
 	}
-	if(numPortals > features.get("numPortals")){
-	    features.put("numPortals", numPortals);
+
+	double numPortalsClass = FIRST_CLASS;
+	if(numPortals > NUM_PORTALS_3RD_CLASS_LOW_LIMIT){
+	    numPortalsClass = THIRD_CLASS;
 	}
-	if(numPortalTypes > features.get("numPortalTypes")){
-	    features.put("numPortalTypes", numPortalTypes);
+	else if (numPortals != 0){
+	    numPortalsClass = SECOND_CLASS;
+	}
+	if (numPortalsClass > features.get("numPortals")){
+	    features.put("numPortals", numPortalsClass);
+	}
+
+	double numPortalTypesClass = FIRST_CLASS;
+	if(numPortalTypes > NUM_PORTALTYPES_3RD_CLASS_LOW_LIMIT){
+	    numPortalTypesClass = THIRD_CLASS;
+	}
+	else if (numPortalTypes != 0){
+	    numPortalTypesClass = SECOND_CLASS;
+	}
+	if (numPortalTypesClass > features.get("numPortalTypes")){
+	    features.put("numPortalTypes", numPortalTypesClass);
 	}
     }
 
@@ -216,8 +239,8 @@ public class Agent extends AbstractPlayer {
      * Analyze the number of NPC types and the total number of NPC in the game.
      */
     private void detectNPCFeatures(List<Observation>[] NPCTypes) {
-	double numNPC = 0.0;
-	double numNPCTypes = 0.0;
+	int numNPC = 0;
+	int numNPCTypes = 0;
 
 	if (NPCTypes != null) {
 	    numNPCTypes = NPCTypes.length;
@@ -258,26 +281,38 @@ public class Agent extends AbstractPlayer {
      */
     private void detectSpriteFeatures(List<Observation>[] immovableTypes, List<Observation>[] movableTypes,
 				      List<Observation>[] spritesTypesByPlayer) {
-	double numImmovableSprites = 0.0;
-	double numMovableSprites = 0.0;
-	double numPlayerSprites = 0.0;
+	int numImmovableSprites = 0;
+	int numMovableSprites = 0;
+	int numPlayerSprites = 0;
 
 	// Get the number of types of immovable sprites.
 	if (immovableTypes != null) numImmovableSprites = immovableTypes.length;
-	if(numImmovableSprites > features.get("numImmovableSprites")) {
-	    features.put("numImmovableSprites", numImmovableSprites);
+	double numImmovableSpritesClass = FIRST_CLASS;
+	if (numImmovableSprites > NUM_IMMOV_SPRITES_2ND_CLASS_LOW_LIMIT) {
+	    numImmovableSpritesClass = SECOND_CLASS;
+	}
+	if(numImmovableSpritesClass > features.get("numImmovableSprites")) {
+	    features.put("numImmovableSprites", numImmovableSpritesClass);
 	}
 
 	// Get the number of types of movable sprites (NOT NPC).
 	if (movableTypes != null) numMovableSprites = movableTypes.length;
-	if(numMovableSprites > features.get("numMovableSprites")){
-	    features.put("numMovableSprites", numMovableSprites);
+	double numMovableSpritesClass = FIRST_CLASS;
+	if (numMovableSprites > NUM_MOV_SPRITES_2ND_CLASS_LOW_LIMIT) {
+	    numMovableSpritesClass = SECOND_CLASS;
+	}
+	if(numMovableSpritesClass > features.get("numMovableSprites")) {
+	    features.put("numMovableSprites", numMovableSpritesClass);
 	}
 
 	// Get the number of types of sprites that are created by the player.
 	if (spritesTypesByPlayer != null) numPlayerSprites = spritesTypesByPlayer.length;
-	if(numPlayerSprites > features.get("numPlayerSprites")){
-	    features.put("numPlayerSprites", numPlayerSprites);
+	double numPlayerSpritesClass = FIRST_CLASS;
+	if (numPlayerSprites > NUM_PLAYER_SPRITES_2ND_CLASS_LOW_LIMIT){
+	    numPlayerSpritesClass = SECOND_CLASS;
+	}
+	if(numPlayerSpritesClass > features.get("numPlayerSprites")){
+	    features.put("numPlayerSprites", numPlayerSpritesClass);
 	}
     }
 
@@ -291,7 +326,6 @@ public class Agent extends AbstractPlayer {
 	    int numTypesResources = resources.length;
 	    double isResourcesAvailable = numTypesResources == 0 ?
 					  0.0 : 1.0;
-	    // If there are 0, we are in first class
 	    double numTypesResourcesClass = FIRST_CLASS;
 	    if (numTypesResources >= NUM_TYPES_RESOURCES_3RD_CLASS_LOW_LIMIT){
 		numTypesResourcesClass = THIRD_CLASS;
@@ -300,13 +334,17 @@ public class Agent extends AbstractPlayer {
 		numTypesResourcesClass = SECOND_CLASS;
 	    }
 	    features.put("numTypesResources", numTypesResourcesClass);
-	    features.put("isResourcesAvailable", isResourcesAvailable);
+	    if (isResourcesAvailable > features.get("isResourcesAvailable"))
+		features.put("isResourcesAvailable", isResourcesAvailable);
 	}
 	int numTypesResourcesAvatar = avatarResources.size();
-	double avatarHasResources = numTypesResourcesAvatar == 0 ?
-				    0.0 : 1.0;
-	features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
-	features.put("avatarHasResources", avatarHasResources);
+	double avatarHasResources = numTypesResourcesAvatar == 0 ? 0.0 : 1.0;
+	if (numTypesResourcesAvatar+0.0 > features.get("numTypesResourcesAvatar")){
+	    features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
+	}
+	if (avatarHasResources > features.get("avatarHasResources")){
+	    features.put("avatarHasResources", avatarHasResources);
+	}
     }
 
     /**
