@@ -1,4 +1,8 @@
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,40 +16,16 @@ import tools.StatSummary;
  * Time: 16:29
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
-
-class result
-{
-    private int game;
-    private int level;
-    private int timeStamp;
-    private int win;
-    private double score;
-    private String controller;
-
-    public result(final int game, final int level, final int timeStamp, final int win, final double score,
-                  final String controller)
-    {
-        this.game = game;
-        this.level = level;
-        this.timeStamp = timeStamp;
-        this.win = win;
-        this.score = score;
-        this.controller = controller;
-    }
-}
-
-
 public class Test
 {
-    public static ArrayList<Integer> gameToController = new ArrayList<>();
-    public static void manipArray() {
-        gameToController.add(2);
-    }
+    private static Stats[][] gameToController = new Stats[83][6];
+    private final static String FILENAME = "bestController";
+
     public static void main(String[] args)
     {
         //Available controllers:
-    	String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
-    	String doNothingController = "controllers.singlePlayer.doNothing.Agent";
+        String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
+        String doNothingController = "controllers.singlePlayer.doNothing.Agent";
         String sampleOneStepController = "controllers.singlePlayer.sampleonesteplookahead.Agent";
         String sampleMCTSController = "controllers.singlePlayer.sampleMCTS.Agent";
         String sampleFlatMCTSController = "controllers.singlePlayer.sampleFlatMCTS.Agent";
@@ -54,14 +34,14 @@ public class Test
         String sampleOLETSController = "controllers.singlePlayer.olets.Agent";
         String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
 
-	// Our agent that is used to collect features and save them
-	String featureCollectingController = "controllers.singlePlayer.featureCollectingAgent.Agent";
+        // Our agent that is used to collect features and save them
+        String featureCollectingController = "controllers.singlePlayer.featureCollectingAgent.Agent";
 
         //Available Generators
         String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
         String geneticGenerator = "levelGenerators.geneticLevelGenerator.LevelGenerator";
         String constructiveLevelGenerator = "levelGenerators.constructiveLevelGenerator.LevelGenerator";
-        
+
         //Available games:
         String gamesPath = "examples/gridphysics/";
         String games[] = new String[]{};
@@ -105,8 +85,8 @@ public class Test
         String recordActionsFile = null;//"actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
 
         // 1. This starts a game, in a level, played by a human.
-    //    ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
-        
+        //    ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
+
         // 2. This plays a game in a level by the controller.
         //ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
 
@@ -122,42 +102,85 @@ public class Test
 //        	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
 //        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
 //        }
-        
+
         //5. This starts a game, in a generated level created by a specific level generator
 
         //if(ArcadeMachine.generateOneLevel(game, randomLevelGenerator, recordLevelFile)){
         //	ArcadeMachine.playOneGeneratedLevel(game, recordActionsFile, recordLevelFile, seed);
         //}
-        
-     //   6. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
-        String currController = "";
+
+        //   6. This plays N games, in the first L levels, M times each. Actions to file optional (set saveActions to true).
         boolean firstRun = true;
-        String[] controllers = {"sampleMCTSController", "sampleOLMCTSController", "sampleGAController"};
-        for (int z = 0; z <controllers.length; z++) {
-            currController = controllers[z];
-
-
-            int N = 2, L = 2, M = 1;
-            boolean saveActions = false;
+        boolean update = false;
+        int N = 79, L = 5;
+        String[] controllers = {sampleMCTSController, sampleOLMCTSController, sampleGAController};
+        for (int z = 0; z < controllers.length; z++) {
             String[] levels = new String[L];
-            String[] actionFiles = new String[L * M];
             for (int i = 0; i < N; ++i) {
-                int actionIdx = 0;
                 game = gamesPath + games[i] + ".txt";
                 for (int j = 0; j < L; ++j) {
+                    System.out.println("Spel nummer: " + " " + i + " " + "Level: " + " " + j);
                     levels[j] = gamesPath + games[i] + "_lvl" + j + ".txt";
-                    double[] test = ArcadeMachine.runOneGame(game, levels[j], false, sampleMCTSController, null, seed, 0);
-                    for (int k = 0; k < test.length; k++) {
-                        double win = test[0];
-                        double score = test[1];
-                        double timesteps = test[2];
+                    double[] result = ArcadeMachine.runOneGame(game, levels[j], false, controllers[z], null, seed, 0);
+                    double win = result[0];
+                    double score = result[1];
+                    double timeSteps = result[2];
+
+                    if (firstRun) {
+                        Stats currStats = new Stats(timeSteps, win, score, z);
+                        gameToController[i][j] = currStats;
+                    } else {
+                        Stats bestStats = gameToController[i][j];
+                        if (bestStats.win < win) {
+                           update = true;
+                        } else if (bestStats.win == win){
+                            if(bestStats.score < score){
+                                update = true;
+                            }else if(bestStats.score == score){
+                                if(bestStats.timeStamp > timeSteps){
+                                    update = true;
+                                }
+                            }
+                        }
+                        if (update) {
+                            Stats currStats = new Stats(timeSteps, win, score, z);
+                            gameToController[i][j] = currStats;
+                            update = false;
+                        }
                     }
-
-
-                        if (saveActions) for (int k = 0; k < M; ++k)
-                            actionFiles[actionIdx++] = "actions_game_" + i + "_level_" + j + "_" + k + ".txt";
                 }
             }
+            firstRun = false;
+        }
+        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(FILENAME, true), "utf-8")))
+        {
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < L; j++) {
+                    writer.write(gameToController[i][j].controller + "\n");
+                }
+            }
+        }
+        catch (Exception e){
+            System.out.println(String.format("Got Exception: %s", e));
+        }
+    }
+
+
+    static class Stats
+    {
+        private double timeStamp;
+        private double win;
+        private double score;
+        private int controller;
+
+        public Stats(final double timeStamp, final double win, final double score,
+                     final int controller)
+        {
+            this.timeStamp = timeStamp;
+            this.win = win;
+            this.score = score;
+            this.controller = controller;
         }
     }
 }
