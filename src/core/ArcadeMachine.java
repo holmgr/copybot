@@ -167,7 +167,7 @@ public class ArcadeMachine
 
         //This, the last thing to do in this method, always:
         toPlay.handleResult();
-        toPlay.printResult();
+        //toPlay.printResult();
 
         return toPlay.getFullResult();
     }
