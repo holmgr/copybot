@@ -1,6 +1,7 @@
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ import tools.StatSummary;
  */
 public class Test
 {
-    private static Stats[][] gameToController = new Stats[83][6];
+  //  private static Stats[][] gameToController = new Stats[83][6];
     private final static String FILENAME = "bestController";
 
     public static void main(String[] args)
@@ -73,8 +74,14 @@ public class Test
         boolean visuals = true;
         int seed = new Random().nextInt();
 
-        //Game and level to play
 
+        try {
+            FileCombiner fileWriter = new FileCombiner();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //Game and level to play
+/*
         int gameIdx = 0;
         int levelIdx = 4; //level names from 0 to 4 (game_lvlN.txt).
 
@@ -181,6 +188,6 @@ public class Test
             this.win = win;
             this.score = score;
             this.controller = controller;
-        }
+        }*/
     }
 }
