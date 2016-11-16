@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
  */
 public class Test {
 
-    static final int TRAINING_SET_SIZE = 2;
-    static final int NUMBER_OF_LEVELS = 1;
-    static final int NUMBER_OF_TRIES = 1;
+    private static final int TRAINING_SET_SIZE = 2;
+    private static final int NUMBER_OF_LEVELS = 1;
+    private static final int NUMBER_OF_TRIES = 1;
 
     public static void main(String[] args) {
 
