@@ -17,29 +17,35 @@ public class FileCombiner
     private String answers = "bestController.txt";
 
     public FileCombiner() throws IOException {
-	int counter = 0;
+	boolean firstRun = true;
 	Writer writer = new BufferedWriter(new OutputStreamWriter(
-		new FileOutputStream("result.txt", true)
+		new FileOutputStream("trainingData.train", true)
 	));
 	BufferedReader feBr = new BufferedReader(new FileReader(features));
 	BufferedReader anBr = new BufferedReader(new FileReader(answers));
 	while(true){
+	    // change the loop length based on how many features we have.
 	    String feature = feBr.readLine();
 	    String answer = anBr.readLine();
-	    counter++;
 	    if(feature == null || answer == null){
-		System.out.println(feature  +  "   " + answer);;
-		System.out.println(counter);
 		break;
 	    }
-	    writer.write(feature + "\n");
-	    writer.write(answer + "\n");
+	    if(!firstRun) writer.write("\n");
+	    else firstRun = false;
 
+	    String[] splittedOnSpace = feature.split(" ");
+
+	    writer.write(answer + " ");
+	    for (int i = 0; i < 16; i++) {
+		String[] splittedOnEqual = splittedOnSpace[i].split("=");
+		String[] splittedOnDot = splittedOnEqual[1].split("\\.");
+		String result = splittedOnDot[0];
+		if(i == 0) writer.write(i+ ":" + result);
+		else writer.write(" "+ i + ":" + result);
+	    }
 
 	}
-	writer.flush();
 	writer.close();
-	System.out.println(counter);
     }
 
 }
