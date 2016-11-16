@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import tools.StatSummary;
  */
 public class Test
 {
+
     // Uncomment below to compare what games fit to which controller
     /*
     private static Stats[][] gameToController = new Stats[83][6];
@@ -75,6 +77,15 @@ public class Test
         boolean visuals = true;
         int seed = new Random().nextInt();
 
+        //Uncomment section below to combine features with answers of which controller to use.
+/*
+        try {
+            FileCombiner fileWriter = new FileCombiner();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        */
+
         //Game and level to play
 
         int gameIdx = 0;
@@ -86,6 +97,8 @@ public class Test
         String recordLevelFile = generateLevelPath + games[gameIdx] + "_glvl.txt";
         String recordActionsFile = null;//"actions_" + games[gameIdx] + "_lvl" + levelIdx + "_" + seed + ".txt"; //where to record the actions executed. null if not to save.
 
+        //Uncomment section below to collect features from games.
+/*
 	// Loop to collect features of 80 games, using 5 levels each
 	for (int i = 0; i < 80; i++){
 	    String gameToPlay = gamesPath + games[i] + ".txt";
@@ -95,12 +108,13 @@ public class Test
 					 0);
 	    }
 	}
+        */
 
         // 1. This starts a game, in a level, played by a human.
         //    ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
         // 2. This plays a game in a level by the controller.
-    //    ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
+        ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
 
 
         // 3. This replays a game from an action file previously recorded
@@ -144,7 +158,8 @@ public class Test
 
         //      This code is for playing games and writing which controller was best suitable for the games played to a File.
         //      You can choose to play a game several times with several levels
-       /* boolean firstRun = true;
+       /*
+        boolean firstRun = true;
         boolean update = false;
         int N = 79, L = 5;
         String[] controllers = {sampleMCTSController, sampleOLMCTSController, sampleGAController};
