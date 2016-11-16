@@ -58,7 +58,7 @@ public class Test {
         // Get the actual names for the controllers
         List<String> names = controllers
                 .stream()
-                .map(s -> s.split("\\.")[2])
+                .map(Test::extractControllerName)
                 .collect(Collectors.toList());
 
         // Calculate the length of the longest controller name
@@ -67,11 +67,11 @@ public class Test {
                 .mapToInt(String::length)
                 .reduce(0, Math::max);
 
-
+        // List of strings to be written to file
         List<String> lines = new ArrayList<>();
 
         // Print header for table
-        int numberOfSpaces = TRAINING_SET_SIZE * 2;
+        int numberOfSpaces = TRAINING_SET_SIZE * 4;
         lines.add(String.format("%" + maxNameLength + "s:\t" + "%" + numberOfSpaces + "s\t%s:" ,
                 "Controllers",
                 "",
@@ -80,22 +80,31 @@ public class Test {
         // Do a run of all games for each controller and print the results
         for (String controller : controllers) {
 
-            String name = controller.split("\\.")[2];
+            // Take out the name for this controller
+            String name = extractControllerName(controller);
             int[] wins = testController(controller, trainingSet);
+
+            // Format the result as a space separated string (2 chars per result)
             String results = Arrays.stream(wins)
-                    .mapToObj(res -> String.format("%2d", res))
+                    .mapToObj(res -> String.format("%4d", res))
                     .reduce("", String::concat);
+
             int totalWins = Arrays.stream(wins).sum();
 
             lines.add(String.format("%" + maxNameLength + "s:\t%s\t%s", name, results, totalWins));
         }
 
+        // Write results to file
         Path file = Paths.get("controller-results.txt");
         try {
             Files.write(file, lines, Charset.forName("UTF-8"));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String extractControllerName(String s) {
+        return s.split("\\.")[2];
     }
 
     private static int[] testController(String controller, List<String> gameSet) {
