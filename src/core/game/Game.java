@@ -30,6 +30,7 @@ import tools.*;
 import tools.pathfinder.Node;
 import tools.pathfinder.PathFinder;
 
+; // imports all static members
 
 /**
  * Created with IntelliJ IDEA.
@@ -1069,6 +1070,7 @@ public abstract class Game
             }
         }
     }
+
 
     /**
      * Prints the result of the game, indicating the winner, the score and the
