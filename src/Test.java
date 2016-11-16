@@ -1,10 +1,14 @@
 import core.ArcadeMachine;
 
-import java.util.concurrent.*;
-import java.util.*;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.lang.Math.max;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,6 +18,10 @@ import static java.lang.Math.max;
  * This is a Java port from Tom Schaul's VGDL - https://github.com/schaul/py-vgdl
  */
 public class Test {
+
+    static final int TRAINING_SET_SIZE = 2;
+    static final int NUMBER_OF_LEVELS = 1;
+    static final int NUMBER_OF_TRIES = 1;
 
     public static void main(String[] args) {
 
@@ -47,8 +55,6 @@ public class Test {
                 "controllers.singlePlayer.repeatOLETS.Agent"
         );
 
-        List<String> gameSet = trainingSet.subList(0, 2);
-
         // Get the actual names for the controllers
         List<String> names = controllers
                 .stream()
@@ -61,12 +67,34 @@ public class Test {
                 .mapToInt(String::length)
                 .reduce(0, Math::max);
 
+
+        List<String> lines = new ArrayList<>();
+
+        // Print header for table
+        int numberOfSpaces = TRAINING_SET_SIZE * 2;
+        lines.add(String.format("%" + maxNameLength + "s:\t" + "%" + numberOfSpaces + "s\t%s:" ,
+                "Controllers",
+                "",
+                "Total"));
+
         // Do a run of all games for each controller and print the results
-        String format = "%" + maxNameLength + "s:\t";
         for (String controller : controllers) {
+
             String name = controller.split("\\.")[2];
-            System.out.printf(format, name);
-            System.out.println(Arrays.toString(testController(controller, gameSet)));
+            int[] wins = testController(controller, trainingSet);
+            String results = Arrays.stream(wins)
+                    .mapToObj(res -> String.format("%2d", res))
+                    .reduce("", String::concat);
+            int totalWins = Arrays.stream(wins).sum();
+
+            lines.add(String.format("%" + maxNameLength + "s:\t%s\t%s", name, results, totalWins));
+        }
+
+        Path file = Paths.get("controller-results.txt");
+        try {
+            Files.write(file, lines, Charset.forName("UTF-8"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -74,16 +102,15 @@ public class Test {
         int seed = 4; // Arbitrary random number :)
 
         String gamesPath = "examples/gridphysics/";
-        int numLevels = 1, tries = 1;
-        int[] wins = new int[gameSet.size()];
+        int[] wins = new int[TRAINING_SET_SIZE];
 
-        for (int j = 0; j < gameSet.size(); j++) {
+        for (int j = 0; j < TRAINING_SET_SIZE; j++) {
 
             String game = gamesPath + gameSet.get(j) + ".txt";
 
-            for (int k = 0; k < numLevels; ++k) {
+            for (int k = 0; k < NUMBER_OF_LEVELS; ++k) {
 
-                for (int l = 0; l < tries; l++) {
+                for (int l = 0; l < NUMBER_OF_TRIES; l++) {
                     String level = gamesPath + gameSet.get(j) + "_lvl" + j + ".txt";
                     double[] results = ArcadeMachine.runOneGame(game, level, false, controller, null, seed, 0);
                     wins[j] += (int) results[0];
