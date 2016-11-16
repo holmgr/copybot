@@ -38,7 +38,7 @@ public class Agent extends AbstractPlayer {
     // Use MCTS for feature collection
     private SingleMCTSPlayer mctsPlayer;
     // Name of file to write features to
-    private final static String FILENAME = "features.txt";
+    private final static String FILENAME = "featuresTraining.txt";
     private final static double FIRST_CLASS = 0.0;
     private final static double SECOND_CLASS = 1.0;
     private final static double THIRD_CLASS = 2.0;
