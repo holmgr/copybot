@@ -1,10 +1,10 @@
-package Return42.algorithms.deterministic.randomSearch.rollout.picker;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.picker;
 
-import Return42.algorithms.deterministic.randomSearch.rollout.strategy.GuidedRollout;
-import Return42.algorithms.deterministic.randomSearch.rollout.strategy.RollOutStrategy;
-import Return42.algorithms.deterministic.randomSearch.rollout.strategy.SoftMaxHeuristicRollOut;
-import Return42.heuristics.action.HeightMapWithUseAndNilHeuristic;
-import Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy.GuidedRollout;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy.RollOutStrategy;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy.SoftMaxHeuristicRollOut;
+import controllers.singlePlayer.Return42.heuristics.action.HeightMapWithUseAndNilHeuristic;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
 
 public class AdaptiveRolloutPicker implements RolloutPicker {
 

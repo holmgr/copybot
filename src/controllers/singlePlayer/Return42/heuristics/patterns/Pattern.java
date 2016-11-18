@@ -1,6 +1,6 @@
-package Return42.heuristics.patterns;
+package controllers.singlePlayer.Return42.heuristics.patterns;
 
-import Return42.GameStateCache;
+import controllers.singlePlayer.Return42.GameStateCache;
 import ontology.Types;
 
 public interface Pattern {

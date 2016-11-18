@@ -1,4 +1,4 @@
-package YOLOBOT;
+package controllers.singlePlayer.YOLOBOT;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -7,14 +7,14 @@ import java.util.List;
 
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
-import YOLOBOT.SubAgents.BreitenSucheAgent;
-import YOLOBOT.SubAgents.SubAgent;
-import YOLOBOT.SubAgents.SubAgentStatus;
-import YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
-import YOLOBOT.SubAgents.bfs.BFS;
-import YOLOBOT.Util.Heatmap;
-import YOLOBOT.Util.Heuristics.HeuristicList;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.SubAgents.BreitenSucheAgent;
+import controllers.singlePlayer.YOLOBOT.SubAgents.SubAgent;
+import controllers.singlePlayer.YOLOBOT.SubAgents.SubAgentStatus;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
+import controllers.singlePlayer.YOLOBOT.SubAgents.bfs.BFS;
+import controllers.singlePlayer.YOLOBOT.Util.Heatmap;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.HeuristicList;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.VGDLViewer;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;

@@ -1,11 +1,11 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 import java.util.Arrays;
 import java.util.List;
 
 import ontology.Types.ACTIONS;
 import tools.Vector2d;
-import Return42.util.Util;
+import controllers.singlePlayer.Return42.util.Util;
 import core.game.StateObservation;
 
 /**

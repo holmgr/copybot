@@ -1,4 +1,4 @@
-package Return42.knowledgebase.observation;
+package controllers.singlePlayer.Return42.knowledgebase.observation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,10 +10,10 @@ import java.util.Set;
 
 import ontology.Types;
 import tools.Vector2d;
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.SpriteType;
-import Return42.util.MapUtil;
-import Return42.util.ResourcesAndTypeKey;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.SpriteType;
+import controllers.singlePlayer.Return42.util.MapUtil;
+import controllers.singlePlayer.Return42.util.ResourcesAndTypeKey;
 import core.game.Event;
 import core.game.Observation;
 import core.game.StateObservation;

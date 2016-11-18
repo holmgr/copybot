@@ -1,13 +1,13 @@
-package Return42.heuristics.action;
+package controllers.singlePlayer.Return42.heuristics.action;
 
 import java.awt.Dimension;
 
 import ontology.Types.ACTIONS;
 import tools.Vector2d;
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.WalkableSpaceGenerator;
-import Return42.knowledgebase.observation.WalkableSpace;
-import Return42.util.Util;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.WalkableSpaceGenerator;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpace;
+import controllers.singlePlayer.Return42.util.Util;
 import core.game.StateObservation;
 
 /**

@@ -1,11 +1,11 @@
-package Return42.heuristics.action;
+package controllers.singlePlayer.Return42.heuristics.action;
 
 import ontology.Types.ACTIONS;
 import tools.Vector2d;
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.ScoreHeightMapGenerator;
-import Return42.util.Util;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.ScoreHeightMapGenerator;
+import controllers.singlePlayer.Return42.util.Util;
 import core.game.StateObservation;
 
 public class HeightMapHeuristic implements ActionHeuristic {

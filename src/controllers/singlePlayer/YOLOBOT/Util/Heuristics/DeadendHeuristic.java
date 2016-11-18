@@ -1,8 +1,8 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import ontology.Types.ACTIONS;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Planner.KnowledgeBasedAStar;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Planner.KnowledgeBasedAStar;
 
 public class DeadendHeuristic extends IHeuristic {
 	

@@ -1,4 +1,4 @@
-package YBCriber.pcollections;
+package controllers.singlePlayer.YBCriber.pcollections;
 
 import java.util.AbstractList;
 import java.util.Collection;

@@ -1,4 +1,4 @@
-package Return42.util;
+package controllers.singlePlayer.Return42.util;
 
 public final class Position {
 	public final int x;

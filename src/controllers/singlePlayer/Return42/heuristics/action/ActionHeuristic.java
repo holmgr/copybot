@@ -1,4 +1,4 @@
-package Return42.heuristics.action;
+package controllers.singlePlayer.Return42.heuristics.action;
 
 import ontology.Types.ACTIONS;
 import core.game.StateObservation;

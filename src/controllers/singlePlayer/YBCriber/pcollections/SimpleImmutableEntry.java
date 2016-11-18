@@ -1,4 +1,4 @@
-package YBCriber.pcollections;
+package controllers.singlePlayer.YBCriber.pcollections;
 
 import java.util.Map;
 import java.util.Map.Entry;

@@ -1,6 +1,6 @@
-package Return42.algorithms.deterministic.puzzleSolver.heuristic;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic;
 
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.StateObservation;
 
 public class NumberOfResourcesHeuristic implements AStarHeuristic {

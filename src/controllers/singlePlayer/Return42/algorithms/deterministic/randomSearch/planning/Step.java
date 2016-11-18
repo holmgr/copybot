@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.randomSearch.planning;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning;
 
 import java.util.List;
 

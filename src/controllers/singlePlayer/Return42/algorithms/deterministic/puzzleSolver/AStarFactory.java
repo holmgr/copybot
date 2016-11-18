@@ -1,21 +1,21 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
-import Return42.algorithms.deterministic.puzzleSolver.MovableSinkCorrelationFinder.MovableSinkCorrelation;
-import Return42.algorithms.deterministic.puzzleSolver.cache.LruStateCache;
-import Return42.algorithms.deterministic.puzzleSolver.cache.StateCache;
-import Return42.algorithms.deterministic.puzzleSolver.costFunction.CombinedCostFunction;
-import Return42.algorithms.deterministic.puzzleSolver.costFunction.ConstantCostFunction;
-import Return42.algorithms.deterministic.puzzleSolver.costFunction.PenalizeCornerCostFunction;
-import Return42.algorithms.deterministic.puzzleSolver.heuristic.CombinedHeuristic;
-import Return42.algorithms.deterministic.puzzleSolver.heuristic.DistanceBetweenMovablesAndSinksHeuristic;
-import Return42.algorithms.deterministic.puzzleSolver.heuristic.DistanceToNextMovableHeuristic;
-import Return42.algorithms.deterministic.puzzleSolver.heuristic.FavorWinHeuristic;
-import Return42.algorithms.deterministic.puzzleSolver.heuristic.NumberOfResourcesHeuristic;
-import Return42.algorithms.deterministic.puzzleSolver.heuristic.ScoreHeuristic;
-import Return42.algorithms.deterministic.puzzleSolver.simulation.AStarAdvanceFunction;
-import Return42.algorithms.deterministic.puzzleSolver.simulation.MissileAvoidingStateAdvancer;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.observation.ScoreObserver;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.MovableSinkCorrelationFinder.MovableSinkCorrelation;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.cache.LruStateCache;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.cache.StateCache;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.costFunction.CombinedCostFunction;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.costFunction.ConstantCostFunction;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.costFunction.PenalizeCornerCostFunction;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic.CombinedHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic.DistanceBetweenMovablesAndSinksHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic.DistanceToNextMovableHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic.FavorWinHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic.NumberOfResourcesHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic.ScoreHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.simulation.AStarAdvanceFunction;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.simulation.MissileAvoidingStateAdvancer;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.observation.ScoreObserver;
 import core.game.StateObservation;
 
 /**

@@ -2,7 +2,7 @@
  * Code written by Adrien Couetoux, acouetoux@ulg.ac.be It is free to use,
  * distribute, and modify. User: adrienctx Date: 12/01/2015
  */
-package adrienctx;
+package controllers.singlePlayer.adrienctx;
 
 import java.util.Arrays;
 import java.util.HashMap;

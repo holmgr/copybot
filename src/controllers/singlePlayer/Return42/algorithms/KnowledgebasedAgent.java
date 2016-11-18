@@ -1,7 +1,7 @@
-package Return42.algorithms;
+package controllers.singlePlayer.Return42.algorithms;
 
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.KnowledgeBaseUpdatingStateObservation;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBaseUpdatingStateObservation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 

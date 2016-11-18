@@ -1,4 +1,4 @@
-package Return42.algorithms.melee;
+package controllers.singlePlayer.Return42.algorithms.melee;
 
 import java.util.Collections;
 import java.util.LinkedList;

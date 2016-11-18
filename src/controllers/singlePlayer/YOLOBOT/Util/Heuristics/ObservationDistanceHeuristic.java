@@ -1,7 +1,7 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import core.game.Observation;
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public class ObservationDistanceHeuristic extends IHeuristic {
 

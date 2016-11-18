@@ -1,7 +1,7 @@
-package Return42.algorithms.deterministic.puzzleSolver.heuristic;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic;
 
-import Return42.util.DistanceUtils;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.DistanceUtils;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.Observation;
 import core.game.StateObservation;
 

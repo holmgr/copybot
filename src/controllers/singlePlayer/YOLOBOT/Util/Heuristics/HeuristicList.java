@@ -1,9 +1,9 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public class HeuristicList {
 	public static HeuristicList instance;

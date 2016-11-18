@@ -1,4 +1,4 @@
-package Return42.knowledgebase.observation;
+package controllers.singlePlayer.Return42.knowledgebase.observation;
 
 import java.util.HashSet;
 import java.util.Set;

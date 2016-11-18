@@ -1,9 +1,9 @@
-package Return42.algorithms;
+package controllers.singlePlayer.Return42.algorithms;
 
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.deterministic.CombinedDeterministicAgent;
-import Return42.algorithms.deterministic.NonDeterministicRandomAgent;
-import Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.algorithms.deterministic.CombinedDeterministicAgent;
+import controllers.singlePlayer.Return42.algorithms.deterministic.NonDeterministicRandomAgent;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 

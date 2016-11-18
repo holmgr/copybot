@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.randomSearch.planning;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-import Return42.algorithms.deterministic.randomSearch.planning.update.PlanUpdatePolicy;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update.PlanUpdatePolicy;
 import core.game.StateObservation;
 
 public class PlanKeeper {

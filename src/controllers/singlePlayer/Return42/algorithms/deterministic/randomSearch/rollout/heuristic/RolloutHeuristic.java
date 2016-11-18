@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.randomSearch.rollout.heuristic;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.heuristic;
 
 import core.game.StateObservation;
 

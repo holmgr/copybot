@@ -1,7 +1,7 @@
-package YOLOBOT.SubAgents.HandleMCTS;
+package controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS;
 
 import ontology.Types.ACTIONS;
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public class OLNode extends MCTNode{
 	

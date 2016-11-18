@@ -1,4 +1,4 @@
-package YOLOBOT.SubAgents.HandleMCTS;
+package controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -9,28 +9,28 @@ import java.util.Random;
 
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
-import YOLOBOT.Agent;
-import YOLOBOT.YoloState;
-import YOLOBOT.SubAgents.SubAgent;
-import YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.EpsilonGreedyBestFirstRolloutPolicy;
-import YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.HeuristicRolloutPolicy;
-import YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.RandomNotDeadRolloutPolicy;
-import YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.RolloutPolicy;
-import YOLOBOT.Util.Heuristics.AStarDistantsHeuristic;
-import YOLOBOT.Util.Heuristics.DeadendHeuristic;
-import YOLOBOT.Util.Heuristics.DistanceToNpcsHeuristic;
-import YOLOBOT.Util.Heuristics.HeatMapHeuristic;
-import YOLOBOT.Util.Heuristics.HeuristicList;
-import YOLOBOT.Util.Heuristics.HeuristicType;
-import YOLOBOT.Util.Heuristics.IModdableHeuristic;
-import YOLOBOT.Util.Heuristics.OneDimensionMoveToMedianHeuristic;
-import YOLOBOT.Util.Heuristics.ScoreHeuristic;
-import YOLOBOT.Util.Heuristics.ScoreLookaheadHeuristic;
-import YOLOBOT.Util.Heuristics.SectorHeatMapHeuristic;
-import YOLOBOT.Util.Heuristics.SimulateDepthHeuristic;
-import YOLOBOT.Util.Heuristics.WinHeuristic;
-import YOLOBOT.Util.TargedChooser.TargetChooser;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.SubAgents.SubAgent;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.EpsilonGreedyBestFirstRolloutPolicy;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.HeuristicRolloutPolicy;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.RandomNotDeadRolloutPolicy;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies.RolloutPolicy;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.AStarDistantsHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.DeadendHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.DistanceToNpcsHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.HeatMapHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.HeuristicList;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.HeuristicType;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.IModdableHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.OneDimensionMoveToMedianHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.ScoreHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.ScoreLookaheadHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.SectorHeatMapHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.SimulateDepthHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.WinHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.TargedChooser.TargetChooser;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Observation;
 
 public class MCTHandler extends SubAgent {

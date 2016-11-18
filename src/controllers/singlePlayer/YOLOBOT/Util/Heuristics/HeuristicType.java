@@ -1,4 +1,4 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 public enum HeuristicType {
 	ScoreHeuristic,

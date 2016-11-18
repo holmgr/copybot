@@ -1,4 +1,4 @@
-package Return42.util;
+package controllers.singlePlayer.Return42.util;
 
 import java.awt.Dimension;
 import java.util.ArrayList;

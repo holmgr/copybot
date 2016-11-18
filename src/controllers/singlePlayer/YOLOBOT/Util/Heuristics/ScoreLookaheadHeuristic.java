@@ -1,10 +1,10 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import core.game.Observation;
 import tools.Vector2d;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 
 public class ScoreLookaheadHeuristic extends IModdableHeuristic{
 

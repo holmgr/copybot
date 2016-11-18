@@ -1,10 +1,10 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
 import java.util.List;
 
 import ontology.Types;
 import tools.ElapsedCpuTimer;
-import Return42.util.TimeoutException;
+import controllers.singlePlayer.Return42.util.TimeoutException;
 import core.game.StateObservation;
 
 /**

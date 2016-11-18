@@ -1,7 +1,7 @@
-package Return42.algorithms;
+package controllers.singlePlayer.Return42.algorithms;
 
-import Return42.hashing.IGameStateHasher;
-import Return42.hashing.MovableHasher;
+import controllers.singlePlayer.Return42.hashing.IGameStateHasher;
+import controllers.singlePlayer.Return42.hashing.MovableHasher;
 import core.game.Observation;
 import core.game.StateObservation;
 import ontology.Types;

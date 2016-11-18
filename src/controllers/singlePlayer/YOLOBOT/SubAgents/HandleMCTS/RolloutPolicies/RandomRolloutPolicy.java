@@ -1,11 +1,11 @@
-package YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies;
+package controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import ontology.Types.ACTIONS;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 
 public class RandomRolloutPolicy extends RolloutPolicy {
 

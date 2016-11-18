@@ -1,4 +1,4 @@
-package thorbjrn;
+package controllers.singlePlayer.thorbjrn;
 
 import java.util.ArrayDeque;
 import java.util.HashSet;

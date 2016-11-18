@@ -1,10 +1,10 @@
-package YOLOBOT.Util;
+package controllers.singlePlayer.YOLOBOT.Util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Observation;
 
 

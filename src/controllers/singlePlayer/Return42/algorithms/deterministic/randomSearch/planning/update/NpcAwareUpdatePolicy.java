@@ -1,11 +1,11 @@
-package Return42.algorithms.deterministic.randomSearch.planning.update;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update;
 
 import java.util.List;
 
 import tools.Vector2d;
-import Return42.algorithms.deterministic.randomSearch.planning.Plan;
-import Return42.algorithms.deterministic.randomSearch.planning.Step;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.Plan;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.Step;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.StateObservation;
 
 public class NpcAwareUpdatePolicy implements PlanUpdatePolicy {

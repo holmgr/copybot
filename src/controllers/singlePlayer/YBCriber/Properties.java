@@ -1,4 +1,4 @@
-package YBCriber;
+package controllers.singlePlayer.YBCriber;
 
 import java.util.HashMap;
 import tools.Vector2d;

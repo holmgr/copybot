@@ -1,14 +1,14 @@
-package Return42.algorithms.deterministic.randomSearch;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch;
 
-import Return42.algorithms.deterministic.randomSearch.depthControl.DepthControl;
-import Return42.algorithms.deterministic.randomSearch.depthControl.FixedHorizon;
-import Return42.algorithms.deterministic.randomSearch.depthControl.RollingHorizon;
-import Return42.algorithms.deterministic.randomSearch.planning.PlanGenerator;
-import Return42.algorithms.deterministic.randomSearch.planning.PlanKeeper;
-import Return42.algorithms.deterministic.randomSearch.planning.update.NpcAwareUpdatePolicy;
-import Return42.algorithms.deterministic.randomSearch.rollout.heuristic.ScoreHeuristic;
-import Return42.algorithms.deterministic.randomSearch.rollout.picker.AdaptiveRolloutPicker;
-import Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.depthControl.DepthControl;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.depthControl.FixedHorizon;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.depthControl.RollingHorizon;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.PlanGenerator;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.PlanKeeper;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update.NpcAwareUpdatePolicy;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.heuristic.ScoreHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.picker.AdaptiveRolloutPicker;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
 import core.game.StateObservation;
 
 /**

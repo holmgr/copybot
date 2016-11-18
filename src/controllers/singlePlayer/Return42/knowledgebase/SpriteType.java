@@ -1,4 +1,4 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 public enum SpriteType {
     TYPE_AVATAR,

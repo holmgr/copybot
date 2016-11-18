@@ -1,10 +1,10 @@
-package YOLOBOT;
+package controllers.singlePlayer.YOLOBOT;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import YOLOBOT.Helper;
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Helper;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 import ontology.Types;
 import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;

@@ -1,4 +1,4 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +8,12 @@ import java.util.Observer;
 import java.util.Set;
 
 import tools.Vector2d;
-import Return42.hashing.ObservationHasher;
-import Return42.knowledgebase.observation.WalkableSpace;
-import Return42.knowledgebase.observation.WalkableSpaceObserver;
-import Return42.util.BiKey;
-import Return42.util.StateObservationUtils;
-import Return42.util.Util;
+import controllers.singlePlayer.Return42.hashing.ObservationHasher;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpace;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpaceObserver;
+import controllers.singlePlayer.Return42.util.BiKey;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.Util;
 import core.game.Observation;
 import core.game.StateObservation;
 

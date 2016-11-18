@@ -1,6 +1,6 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public abstract class IHeuristic {
 

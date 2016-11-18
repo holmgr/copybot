@@ -1,4 +1,4 @@
-package YOLOBOT.SubAgents.Planner;
+package controllers.singlePlayer.YOLOBOT.SubAgents.Planner;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -9,14 +9,14 @@ import ontology.Types;
 import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;
 import tools.ElapsedCpuTimer;
-import YOLOBOT.Agent;
-import YOLOBOT.YoloState;
-import YOLOBOT.SubAgents.SubAgent;
-import YOLOBOT.SubAgents.SubAgentStatus;
-import YOLOBOT.Util.Planner.KnowledgeBasedAStar;
-import YOLOBOT.Util.Planner.KnowledgeBasedPushSlidePlanner;
-import YOLOBOT.Util.Planner.Zustand;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.SubAgents.SubAgent;
+import controllers.singlePlayer.YOLOBOT.SubAgents.SubAgentStatus;
+import controllers.singlePlayer.YOLOBOT.Util.Planner.KnowledgeBasedAStar;
+import controllers.singlePlayer.YOLOBOT.Util.Planner.KnowledgeBasedPushSlidePlanner;
+import controllers.singlePlayer.YOLOBOT.Util.Planner.Zustand;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Observation;
 
 public class PlannerAgent extends SubAgent {

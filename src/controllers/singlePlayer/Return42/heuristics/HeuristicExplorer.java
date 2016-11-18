@@ -1,6 +1,6 @@
-package Return42.heuristics;
+package controllers.singlePlayer.Return42.heuristics;
 
-import Return42.GameStateCache;
+import controllers.singlePlayer.Return42.GameStateCache;
 import core.game.StateObservation;
 import ontology.Types;
 

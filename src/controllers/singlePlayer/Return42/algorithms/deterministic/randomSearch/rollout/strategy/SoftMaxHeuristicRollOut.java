@@ -1,10 +1,10 @@
-package Return42.algorithms.deterministic.randomSearch.rollout.strategy;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import Return42.heuristics.action.ActionHeuristic;
-import Return42.util.Util;
+import controllers.singlePlayer.Return42.heuristics.action.ActionHeuristic;
+import controllers.singlePlayer.Return42.util.Util;
 import ontology.Types.ACTIONS;
 import core.game.StateObservation;
 

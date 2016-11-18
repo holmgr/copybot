@@ -1,10 +1,10 @@
-package Return42.heuristics;
+package controllers.singlePlayer.Return42.heuristics;
 
-import Return42.GameStateCache;
-import Return42.heuristics.features.CompareFeature;
-import Return42.heuristics.features.KillNpc;
-import Return42.heuristics.features.NextStepEnemy;
-import Return42.heuristics.features.controller.FeatureController;
+import controllers.singlePlayer.Return42.GameStateCache;
+import controllers.singlePlayer.Return42.heuristics.features.CompareFeature;
+import controllers.singlePlayer.Return42.heuristics.features.KillNpc;
+import controllers.singlePlayer.Return42.heuristics.features.NextStepEnemy;
+import controllers.singlePlayer.Return42.heuristics.features.controller.FeatureController;
 import ontology.Types;
 
 import java.util.ArrayList;

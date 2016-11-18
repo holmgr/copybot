@@ -1,4 +1,4 @@
-package YOLOBOT.Util;
+package controllers.singlePlayer.YOLOBOT.Util;
 
 public enum ObservationType {
 	Immovable,

@@ -1,14 +1,14 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
 import java.awt.Graphics2D;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import core.game.StateObservation;
-import Return42.algorithms.deterministic.DeterministicAgent;
-import Return42.algorithms.deterministic.puzzleSolver.AStar.Result;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.util.debug.DebugVisualization;
+import controllers.singlePlayer.Return42.algorithms.deterministic.DeterministicAgent;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.AStar.Result;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.util.debug.DebugVisualization;
 import ontology.Types;
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;

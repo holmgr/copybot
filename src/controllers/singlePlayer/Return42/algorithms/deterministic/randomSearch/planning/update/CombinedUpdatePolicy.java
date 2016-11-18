@@ -1,9 +1,9 @@
-package Return42.algorithms.deterministic.randomSearch.planning.update;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update;
 
 import java.util.Arrays;
 import java.util.List;
 
-import Return42.algorithms.deterministic.randomSearch.planning.Plan;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.Plan;
 import core.game.StateObservation;
 
 public class CombinedUpdatePolicy implements PlanUpdatePolicy {

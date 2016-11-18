@@ -1,15 +1,15 @@
-package Return42.algorithms.deterministic;
+package controllers.singlePlayer.Return42.algorithms.deterministic;
 
 import java.awt.Graphics2D;
 
 import ontology.Types;
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.KnowledgebasedAgent;
-import Return42.algorithms.deterministic.puzzleSolver.AStarSearch;
-import Return42.algorithms.deterministic.randomSearch.RandomSearchFactory;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.util.TimerUtils;
+import controllers.singlePlayer.Return42.algorithms.KnowledgebasedAgent;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.AStarSearch;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.RandomSearchFactory;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.util.TimerUtils;
 import core.game.StateObservation;
 
 public class CombinedDeterministicAgent extends KnowledgebasedAgent

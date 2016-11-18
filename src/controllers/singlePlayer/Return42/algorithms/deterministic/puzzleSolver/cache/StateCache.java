@@ -1,6 +1,6 @@
-package Return42.algorithms.deterministic.puzzleSolver.cache;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.cache;
 
-import Return42.algorithms.deterministic.puzzleSolver.AStarNode;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.AStarNode;
 import core.game.StateObservation;
 
 /**

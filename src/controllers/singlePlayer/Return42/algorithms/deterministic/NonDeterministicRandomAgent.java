@@ -1,14 +1,14 @@
-package Return42.algorithms.deterministic;
+package controllers.singlePlayer.Return42.algorithms.deterministic;
 
 import ontology.Types;
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.KnowledgebasedAgent;
-import Return42.algorithms.deterministic.randomSearch.RandomSearch;
-import Return42.algorithms.deterministic.randomSearch.RandomSearchFactory;
-import Return42.algorithms.melee.MeleeAgent;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.util.StateObservationUtils;
-import Return42.util.TimerUtils;
+import controllers.singlePlayer.Return42.algorithms.KnowledgebasedAgent;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.RandomSearch;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.RandomSearchFactory;
+import controllers.singlePlayer.Return42.algorithms.melee.MeleeAgent;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.TimerUtils;
 import core.game.StateObservation;
 
 public class NonDeterministicRandomAgent extends KnowledgebasedAgent

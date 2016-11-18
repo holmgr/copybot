@@ -1,4 +1,4 @@
-package YOLOBOT;
+package controllers.singlePlayer.YOLOBOT;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -12,9 +12,9 @@ import ontology.Types;
 import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;
 import tools.Vector2d;
-import YOLOBOT.Util.SimpleState;
-import YOLOBOT.Util.StochasticKillmap;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.Util.SimpleState;
+import controllers.singlePlayer.YOLOBOT.Util.StochasticKillmap;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Event;
 import core.game.Observation;
 import core.game.StateObservation;

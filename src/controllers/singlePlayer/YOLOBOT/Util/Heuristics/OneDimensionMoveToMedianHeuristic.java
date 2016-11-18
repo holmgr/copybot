@@ -1,11 +1,11 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import core.game.Observation;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 
 public class OneDimensionMoveToMedianHeuristic extends IHeuristic {
 

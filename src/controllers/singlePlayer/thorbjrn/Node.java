@@ -1,4 +1,4 @@
-package thorbjrn;
+package controllers.singlePlayer.thorbjrn;
 
 import java.util.HashMap;
 import java.util.HashSet;

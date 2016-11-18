@@ -1,14 +1,14 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 import core.game.StateObservation;
-import Return42.algorithms.GameClassification;
-import Return42.knowledgebase.observation.CombinedGameObserver;
-import Return42.knowledgebase.observation.EffectObserver;
-import Return42.knowledgebase.observation.GameObserver;
-import Return42.knowledgebase.observation.NPCSpawnerObserver;
-import Return42.knowledgebase.observation.ScoreObserver;
-import Return42.knowledgebase.observation.TypeInformationObserver;
-import Return42.knowledgebase.observation.WalkableSpaceObserver;
+import controllers.singlePlayer.Return42.algorithms.GameClassification;
+import controllers.singlePlayer.Return42.knowledgebase.observation.CombinedGameObserver;
+import controllers.singlePlayer.Return42.knowledgebase.observation.EffectObserver;
+import controllers.singlePlayer.Return42.knowledgebase.observation.GameObserver;
+import controllers.singlePlayer.Return42.knowledgebase.observation.NPCSpawnerObserver;
+import controllers.singlePlayer.Return42.knowledgebase.observation.ScoreObserver;
+import controllers.singlePlayer.Return42.knowledgebase.observation.TypeInformationObserver;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpaceObserver;
 
 /**
  * Facade class for simplified use of the KnowldeBase 

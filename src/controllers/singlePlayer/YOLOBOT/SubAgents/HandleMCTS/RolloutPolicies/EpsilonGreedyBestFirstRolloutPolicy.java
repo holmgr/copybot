@@ -1,10 +1,10 @@
-package YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies;
+package controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies;
 
 import java.util.ArrayList;
 
 import ontology.Types.ACTIONS;
-import YOLOBOT.YoloState;
-import YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
 
 public class EpsilonGreedyBestFirstRolloutPolicy extends RolloutPolicy {
 

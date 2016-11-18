@@ -1,4 +1,4 @@
-package YBCriber.pcollections;
+package controllers.singlePlayer.YBCriber.pcollections;
 
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -271,7 +271,7 @@ class IntTree<V> {
     
     public Entry<Integer,V> next() {
       IntTree<V> node = stack.get(0);
-      final Entry<Integer,V> result = new YBCriber.pcollections.SimpleImmutableEntry<Integer,V>(key, node.value);
+      final Entry<Integer,V> result = new controllers.singlePlayer.YBCriber.pcollections.SimpleImmutableEntry<Integer,V>(key, node.value);
       
       // find next node.
       // we've already done everything smaller,

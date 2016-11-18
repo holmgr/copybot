@@ -1,7 +1,7 @@
-package Return42.algorithms.GA.genomes;
+package controllers.singlePlayer.Return42.algorithms.GA.genomes;
 
-import Return42.GameStateCache;
-import Return42.heuristics.CompareHeuristic;
+import controllers.singlePlayer.Return42.GameStateCache;
+import controllers.singlePlayer.Return42.heuristics.CompareHeuristic;
 import core.game.StateObservation;
 import ontology.Types;
 

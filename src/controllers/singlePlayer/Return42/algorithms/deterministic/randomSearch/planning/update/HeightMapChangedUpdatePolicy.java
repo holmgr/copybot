@@ -1,10 +1,10 @@
-package Return42.algorithms.deterministic.randomSearch.planning.update;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import Return42.algorithms.deterministic.randomSearch.planning.Plan;
-import Return42.knowledgebase.ScoreHeightMapGenerator;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.Plan;
+import controllers.singlePlayer.Return42.knowledgebase.ScoreHeightMapGenerator;
 import core.game.StateObservation;
 
 public class HeightMapChangedUpdatePolicy implements PlanUpdatePolicy, Observer {

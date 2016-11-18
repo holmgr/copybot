@@ -1,4 +1,4 @@
-package YOLOBOT.SubAgents.HandleMCTS;
+package controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,9 +7,9 @@ import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;
 import tools.Utils;
 import tools.Vector2d;
-import YOLOBOT.Agent;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Observation;
 
 

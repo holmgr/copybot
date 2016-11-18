@@ -1,6 +1,6 @@
-package Return42.algorithms.deterministic.puzzleSolver.costFunction;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.costFunction;
 
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.Event;
 import core.game.Observation;
 import core.game.StateObservation;

@@ -1,9 +1,9 @@
-package Return42.algorithms.melee;
+package controllers.singlePlayer.Return42.algorithms.melee;
 
 import java.util.List;
 
 import ontology.Types.WINNER;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.Observation;
 import core.game.StateObservation;
 

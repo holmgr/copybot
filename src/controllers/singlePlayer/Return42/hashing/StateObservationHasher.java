@@ -1,11 +1,11 @@
-package Return42.hashing;
+package controllers.singlePlayer.Return42.hashing;
 
 import java.util.List;
 
 import ontology.Types;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.observation.EffectObserver;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.observation.EffectObserver;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.Observation;
 import core.game.StateObservation;
 

@@ -1,4 +1,4 @@
-package YOLOBOT.Util.Wissensdatenbank;
+package controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,9 +11,9 @@ import ontology.Types;
 import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;
 import tools.Vector2d;
-import YOLOBOT.Agent;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.SimpleState;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.SimpleState;
 import core.game.Event;
 import core.game.Observation;
 

@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
 import java.util.Collections;
 import java.util.LinkedList;

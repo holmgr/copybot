@@ -1,6 +1,6 @@
-package Return42.heuristics.features;
+package controllers.singlePlayer.Return42.heuristics.features;
 
-import Return42.GameStateCache;
+import controllers.singlePlayer.Return42.GameStateCache;
 import ontology.Types;
 
 public class Gameover extends Feature {

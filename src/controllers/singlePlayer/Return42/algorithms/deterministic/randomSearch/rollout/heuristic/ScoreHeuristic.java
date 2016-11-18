@@ -1,6 +1,6 @@
-package Return42.algorithms.deterministic.randomSearch.rollout.heuristic;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.heuristic;
 
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.StateObservation;
 import ontology.Types.WINNER;
 

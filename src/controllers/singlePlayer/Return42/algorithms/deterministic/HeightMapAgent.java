@@ -1,31 +1,31 @@
-package Return42.algorithms.deterministic;
+package controllers.singlePlayer.Return42.algorithms.deterministic;
 
 import java.awt.Graphics2D;
 
 import ontology.Types;
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.KnowledgebasedAgent;
-import Return42.algorithms.deterministic.randomSearch.RandomSearch;
-import Return42.algorithms.deterministic.randomSearch.depthControl.FixedHorizon;
-import Return42.algorithms.deterministic.randomSearch.planning.PlanGenerator;
-import Return42.algorithms.deterministic.randomSearch.planning.PlanKeeper;
-import Return42.algorithms.deterministic.randomSearch.planning.update.CombinedUpdatePolicy;
-import Return42.algorithms.deterministic.randomSearch.planning.update.HeightMapChangedUpdatePolicy;
-import Return42.algorithms.deterministic.randomSearch.planning.update.NpcAwareUpdatePolicy;
-import Return42.algorithms.deterministic.randomSearch.rollout.heuristic.GameScoreAndHeightMapHeuristic;
-import Return42.algorithms.deterministic.randomSearch.rollout.picker.FixedRolloutPicker;
-import Return42.algorithms.deterministic.randomSearch.rollout.strategy.SoftMaxHeuristicRollOut;
-import Return42.heuristics.action.ActionHeuristic;
-import Return42.heuristics.action.HeightMapWithUseAndNilHeuristic;
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.ScoreHeightMapGenerator;
-import Return42.knowledgebase.WalkableSpaceGenerator;
-import Return42.knowledgebase.observation.WalkableSpace;
-import Return42.util.StateObservationUtils;
-import Return42.util.TimerUtils;
-import Return42.util.debug.DebugVisualization;
+import controllers.singlePlayer.Return42.algorithms.KnowledgebasedAgent;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.RandomSearch;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.depthControl.FixedHorizon;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.PlanGenerator;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.PlanKeeper;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update.CombinedUpdatePolicy;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update.HeightMapChangedUpdatePolicy;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.update.NpcAwareUpdatePolicy;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.heuristic.GameScoreAndHeightMapHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.picker.FixedRolloutPicker;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy.SoftMaxHeuristicRollOut;
+import controllers.singlePlayer.Return42.heuristics.action.ActionHeuristic;
+import controllers.singlePlayer.Return42.heuristics.action.HeightMapWithUseAndNilHeuristic;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.ScoreHeightMapGenerator;
+import controllers.singlePlayer.Return42.knowledgebase.WalkableSpaceGenerator;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpace;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.TimerUtils;
+import controllers.singlePlayer.Return42.util.debug.DebugVisualization;
 import core.game.StateObservation;
 
 public class HeightMapAgent extends KnowledgebasedAgent {

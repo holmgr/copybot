@@ -1,9 +1,9 @@
-package YOLOBOT.SubAgents.bfs;
+package controllers.singlePlayer.YOLOBOT.SubAgents.bfs;
 
 import java.util.LinkedList;
 
 import ontology.Types.ACTIONS;
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public class OwnHistoryLight {
 

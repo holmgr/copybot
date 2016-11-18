@@ -1,4 +1,4 @@
-package NovTea;
+package controllers.singlePlayer.NovTea;
 
 import java.util.ArrayList;
 import java.util.HashMap;

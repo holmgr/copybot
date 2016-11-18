@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
 import ontology.Types;
 import ontology.Types.ACTIONS;

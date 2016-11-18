@@ -1,4 +1,4 @@
-package Return42.util;
+package controllers.singlePlayer.Return42.util;
 
 /**
  * Indicates, that a timeout occurred during an operation.

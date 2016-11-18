@@ -1,12 +1,12 @@
-package YOLOBOT.Util;
+package controllers.singlePlayer.YOLOBOT.Util;
 
 import java.util.HashSet;
 
 import core.game.Observation;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
-import YOLOBOT.Util.Wissensdatenbank.YoloEvent;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloEvent;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 
 public class StochasticKillmap {
 

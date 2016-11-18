@@ -1,6 +1,6 @@
-package Return42.algorithms.GA.genomes;
+package controllers.singlePlayer.Return42.algorithms.GA.genomes;
 
-import Return42.heuristics.CompareHeuristic;
+import controllers.singlePlayer.Return42.heuristics.CompareHeuristic;
 import ontology.Types;
 
 // idea: like DepthGenome but mutate more when score from other genome sucks

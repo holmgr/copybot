@@ -1,4 +1,4 @@
-package YOLOBOT.SubAgents;
+package controllers.singlePlayer.YOLOBOT.SubAgents;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -13,10 +13,10 @@ import ontology.Types;
 import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;
 import tools.ElapsedCpuTimer;
-import YOLOBOT.Agent;
-import YOLOBOT.OwnHistory;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Heatmap;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.OwnHistory;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Heatmap;
 import core.game.Observation;
 
 public class BreitenSucheAgent extends SubAgent {

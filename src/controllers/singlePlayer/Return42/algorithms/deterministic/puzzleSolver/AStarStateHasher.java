@@ -1,7 +1,7 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
-import Return42.hashing.StateObservationHasher;
-import Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.hashing.StateObservationHasher;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
 import core.game.StateObservation;
 
 /**

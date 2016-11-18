@@ -1,4 +1,4 @@
-package Return42.util.debug;
+package controllers.singlePlayer.Return42.util.debug;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -8,8 +8,8 @@ import java.util.List;
 import ontology.Types;
 import ontology.Types.ACTIONS;
 import tools.Vector2d;
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.observation.WalkableSpace;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpace;
 import core.game.StateObservation;
 
 public class DebugVisualization {

@@ -1,4 +1,4 @@
-package YBCriber.pcollections;
+package controllers.singlePlayer.YBCriber.pcollections;
 
 import java.util.AbstractMap;
 import java.util.AbstractSet;
@@ -114,7 +114,7 @@ public final class HashPMap<K,V> extends AbstractMap<K,V> implements PMap<K,V> {
     int size0 = entries.size(),
       i = keyIndexIn(entries, key);
     if(i!=-1) entries = entries.minus(i);
-    entries = entries.plus(new YBCriber.pcollections.SimpleImmutableEntry<K,V>(key, value));
+    entries = entries.plus(new controllers.singlePlayer.YBCriber.pcollections.SimpleImmutableEntry<K,V>(key, value));
     return new HashPMap<K,V>(intMap.plus(key.hashCode(), entries),
         size-size0+entries.size());
   }

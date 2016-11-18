@@ -1,4 +1,4 @@
-package YOLOBOT.Util;
+package controllers.singlePlayer.YOLOBOT.Util;
 
 public class Tuple<T1,T2> {
 

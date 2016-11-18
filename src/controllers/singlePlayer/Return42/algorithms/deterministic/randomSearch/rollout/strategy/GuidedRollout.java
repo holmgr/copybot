@@ -1,12 +1,12 @@
-package Return42.algorithms.deterministic.randomSearch.rollout.strategy;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.observation.WalkableSpace;
-import Return42.util.Util;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpace;
+import controllers.singlePlayer.Return42.util.Util;
 import ontology.Types.ACTIONS;
 import tools.Vector2d;
 import core.game.StateObservation;

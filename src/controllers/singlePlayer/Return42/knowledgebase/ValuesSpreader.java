@@ -1,10 +1,10 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-import Return42.knowledgebase.observation.WalkableSpace;
-import Return42.util.Position;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpace;
+import controllers.singlePlayer.Return42.util.Position;
 
 public class ValuesSpreader {
 

@@ -1,4 +1,4 @@
-package thorbjrn;
+package controllers.singlePlayer.thorbjrn;
 
 
 import tools.Vector2d;

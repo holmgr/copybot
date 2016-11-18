@@ -1,9 +1,9 @@
-package YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies;
+package controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.RolloutPolicies;
 
 import java.util.ArrayList;
 
 import ontology.Types.ACTIONS;
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public abstract class RolloutPolicy {
 

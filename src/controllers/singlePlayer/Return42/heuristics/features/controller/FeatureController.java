@@ -1,6 +1,6 @@
-package Return42.heuristics.features.controller;
+package controllers.singlePlayer.Return42.heuristics.features.controller;
 
-import Return42.GameStateCache;
+import controllers.singlePlayer.Return42.GameStateCache;
 
 public abstract class FeatureController {
     protected boolean active = true;

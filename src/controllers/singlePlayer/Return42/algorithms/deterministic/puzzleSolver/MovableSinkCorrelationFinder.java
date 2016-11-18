@@ -1,11 +1,11 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.StateObservation;
 
 /**

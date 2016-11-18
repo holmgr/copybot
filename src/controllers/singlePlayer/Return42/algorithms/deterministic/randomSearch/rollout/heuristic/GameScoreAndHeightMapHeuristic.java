@@ -1,11 +1,11 @@
-package Return42.algorithms.deterministic.randomSearch.rollout.heuristic;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.heuristic;
 
 import ontology.Types.WINNER;
 import tools.Vector2d;
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.ScoreHeightMapGenerator;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.ScoreHeightMapGenerator;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.StateObservation;
 
 public class GameScoreAndHeightMapHeuristic implements RolloutHeuristic {

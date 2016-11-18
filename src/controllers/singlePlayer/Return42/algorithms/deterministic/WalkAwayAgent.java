@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic;
+package controllers.singlePlayer.Return42.algorithms.deterministic;
 
 import java.awt.Graphics2D;
 import java.lang.Thread.State;
@@ -12,7 +12,7 @@ import java.util.Random;
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
 import tools.Vector2d;
-import Return42.util.NilMoveChecker;
+import controllers.singlePlayer.Return42.util.NilMoveChecker;
 import core.game.StateObservation;
 
 public class WalkAwayAgent implements DeterministicAgent {

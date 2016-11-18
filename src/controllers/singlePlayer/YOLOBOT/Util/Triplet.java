@@ -1,4 +1,4 @@
-package YOLOBOT.Util;
+package controllers.singlePlayer.YOLOBOT.Util;
 
 public class Triplet<T1,T2,T3> {
 	public final T1 Item1;

@@ -1,7 +1,7 @@
-package Return42.heuristics.action;
+package controllers.singlePlayer.Return42.heuristics.action;
 
 import ontology.Types.ACTIONS;
-import Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
 import core.game.StateObservation;
 
 /**

@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.puzzleSolver;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver;
 
 import java.util.HashMap;
 import java.util.List;
@@ -9,12 +9,12 @@ import ontology.Types;
 import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.deterministic.puzzleSolver.cache.StateCache;
-import Return42.algorithms.deterministic.puzzleSolver.costFunction.AStarCostFunction;
-import Return42.algorithms.deterministic.puzzleSolver.heuristic.AStarHeuristic;
-import Return42.algorithms.deterministic.puzzleSolver.simulation.AStarAdvanceFunction;
-import Return42.algorithms.deterministic.puzzleSolver.simulation.AdvanceResult;
-import Return42.util.TimeoutException;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.cache.StateCache;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.costFunction.AStarCostFunction;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic.AStarHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.simulation.AStarAdvanceFunction;
+import controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.simulation.AdvanceResult;
+import controllers.singlePlayer.Return42.util.TimeoutException;
 import core.game.StateObservation;
 
 /**

@@ -1,4 +1,4 @@
-package YOLOBOT.Util.Wissensdatenbank;
+package controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank;
 
 
 public class PlayerUseEvent implements YoloEventController {

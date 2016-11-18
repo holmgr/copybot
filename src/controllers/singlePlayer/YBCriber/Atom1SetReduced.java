@@ -1,4 +1,4 @@
-package YBCriber;
+package controllers.singlePlayer.YBCriber;
 
 import core.game.StateObservation;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package YOLOBOT.Util;
+package controllers.singlePlayer.YOLOBOT.Util;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,4 +1,4 @@
-package YOLOBOT;
+package controllers.singlePlayer.YOLOBOT;
 
 import java.util.List;
 

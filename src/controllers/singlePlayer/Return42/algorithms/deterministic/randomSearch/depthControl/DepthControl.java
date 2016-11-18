@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.randomSearch.depthControl;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.depthControl;
 
 /**
  * Created by Oliver on 27.04.2015.

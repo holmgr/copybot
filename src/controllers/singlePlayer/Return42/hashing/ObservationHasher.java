@@ -1,4 +1,4 @@
-package Return42.hashing;
+package controllers.singlePlayer.Return42.hashing;
 
 import core.game.Observation;
 

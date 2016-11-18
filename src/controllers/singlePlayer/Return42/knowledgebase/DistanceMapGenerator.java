@@ -1,11 +1,11 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import Return42.knowledgebase.observation.WalkableSpace;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.knowledgebase.observation.WalkableSpace;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.StateObservation;
 
 public class DistanceMapGenerator {

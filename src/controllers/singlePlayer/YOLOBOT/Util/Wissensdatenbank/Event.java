@@ -1,6 +1,6 @@
-package YOLOBOT.Util.Wissensdatenbank;
+package controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank;
 
-import YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.Agent;
 
 
 public abstract class Event {

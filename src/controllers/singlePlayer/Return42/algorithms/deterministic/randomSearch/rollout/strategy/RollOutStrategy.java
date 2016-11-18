@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.randomSearch.rollout.strategy;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy;
 
 import core.game.StateObservation;
 import ontology.Types.ACTIONS;

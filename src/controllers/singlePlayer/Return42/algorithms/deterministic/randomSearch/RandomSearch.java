@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.randomSearch;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch;
 
 import java.awt.Graphics2D;
 import java.util.LinkedList;
@@ -6,10 +6,10 @@ import java.util.List;
 
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.deterministic.DeterministicAgent;
-import Return42.algorithms.deterministic.randomSearch.planning.Plan;
-import Return42.algorithms.deterministic.randomSearch.planning.PlanGenerator;
-import Return42.algorithms.deterministic.randomSearch.planning.PlanKeeper;
+import controllers.singlePlayer.Return42.algorithms.deterministic.DeterministicAgent;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.Plan;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.PlanGenerator;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning.PlanKeeper;
 import core.game.StateObservation;
 
 public class RandomSearch implements DeterministicAgent {

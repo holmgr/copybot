@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.puzzleSolver.simulation;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.simulation;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,10 +10,10 @@ import java.util.TreeSet;
 
 import ontology.Types;
 import ontology.Types.ACTIONS;
-import Return42.hashing.MovableHasher;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.observation.EffectObserver;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.hashing.MovableHasher;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.observation.EffectObserver;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.Event;
 import core.game.Observation;
 import core.game.StateObservation;

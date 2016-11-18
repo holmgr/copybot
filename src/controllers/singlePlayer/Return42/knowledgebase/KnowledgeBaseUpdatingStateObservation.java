@@ -1,4 +1,4 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.TreeSet;
 
 import ontology.Types;
 import tools.Vector2d;
-import Return42.knowledgebase.observation.GameObserver;
+import controllers.singlePlayer.Return42.knowledgebase.observation.GameObserver;
 import core.game.Event;
 import core.game.Observation;
 import core.game.StateObservation;

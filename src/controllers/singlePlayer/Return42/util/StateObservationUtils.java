@@ -1,4 +1,4 @@
-package Return42.util;
+package controllers.singlePlayer.Return42.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.Map;
 
 import ontology.Types;
 import tools.Vector2d;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.knowledgebase.observation.ScoreObserver;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.knowledgebase.observation.ScoreObserver;
 import core.game.Observation;
 import core.game.StateObservation;
 
@@ -125,7 +125,7 @@ public class StateObservationUtils {
 	
 		List<Observation>[][] grid = state.getObservationGrid();
 		if ( x < 0 || y < 0 || x >= grid.length || y >= grid[0].length ) {
-			System.out.println( "Warning: Did not find avatar type. Returning 0 instead.");
+			//System.out.println( "Warning: Did not find avatar type. Returning 0 instead.");
 			return 0;
 		}
 
@@ -136,7 +136,7 @@ public class StateObservationUtils {
 			}
 		}
 		
-		System.out.println( "Warning: Did not find avatar type. Returning 0 instead.");
+		//System.out.println( "Warning: Did not find avatar type. Returning 0 instead.");
 		return 0;
 	}
 

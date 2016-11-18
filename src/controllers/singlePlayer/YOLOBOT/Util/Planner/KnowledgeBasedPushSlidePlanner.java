@@ -1,15 +1,15 @@
-package YOLOBOT.Util.Planner;
+package controllers.singlePlayer.YOLOBOT.Util.Planner;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
 import ontology.Types;
-import YOLOBOT.Agent;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
-import YOLOBOT.Util.Wissensdatenbank.YoloEvent;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloEvent;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Observation;
 
 public class KnowledgeBasedPushSlidePlanner {

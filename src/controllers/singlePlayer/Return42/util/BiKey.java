@@ -1,4 +1,4 @@
-package Return42.util;
+package controllers.singlePlayer.Return42.util;
 
 
 public class BiKey<K1, K2> {

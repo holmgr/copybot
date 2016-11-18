@@ -1,9 +1,9 @@
-package Return42.knowledgebase.observation;
+package controllers.singlePlayer.Return42.knowledgebase.observation;
 
 import java.util.Observable;
 
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.SpriteType;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.SpriteType;
 import core.game.StateObservation;
 
 /**

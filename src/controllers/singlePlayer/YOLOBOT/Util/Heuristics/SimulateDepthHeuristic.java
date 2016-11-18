@@ -1,9 +1,9 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import ontology.Types.WINNER;
-import YOLOBOT.Agent;
-import YOLOBOT.YoloState;
-import YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
 
 public class SimulateDepthHeuristic extends IHeuristic{
 	

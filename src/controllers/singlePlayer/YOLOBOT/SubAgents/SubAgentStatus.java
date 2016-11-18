@@ -1,4 +1,4 @@
-package YOLOBOT.SubAgents;
+package controllers.singlePlayer.YOLOBOT.SubAgents;
 
 public enum SubAgentStatus {
 	IDLE,

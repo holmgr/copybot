@@ -1,8 +1,8 @@
-package Return42.knowledgebase;
+package controllers.singlePlayer.Return42.knowledgebase;
 
 import java.util.ArrayList;
 
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import tools.Vector2d;
 import core.game.Observation;
 import core.game.StateObservation;

@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.puzzleSolver.heuristic;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.heuristic;
 
 import core.game.StateObservation;
 

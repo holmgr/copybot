@@ -1,4 +1,4 @@
-package YOLOBOT.Util.TargedChooser;
+package controllers.singlePlayer.YOLOBOT.Util.TargedChooser;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,16 +9,16 @@ import java.util.Map.Entry;
 import java.util.PriorityQueue;
 
 import ontology.Types;
-import YOLOBOT.Agent;
-import YOLOBOT.YoloState;
-import YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
-import YOLOBOT.Util.Heuristics.AStarDistantsHeuristic;
-import YOLOBOT.Util.Heuristics.DeadendHeuristic;
-import YOLOBOT.Util.Heuristics.DistanceToNpcsHeuristic;
-import YOLOBOT.Util.Planner.KnowledgeBasedAStar;
-import YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
-import YOLOBOT.Util.Wissensdatenbank.YoloEvent;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.Agent;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.SubAgents.HandleMCTS.MCTHandler;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.AStarDistantsHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.DeadendHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Heuristics.DistanceToNpcsHeuristic;
+import controllers.singlePlayer.YOLOBOT.Util.Planner.KnowledgeBasedAStar;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.PlayerEvent;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloEvent;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Observation;
 
 public class TargetChooser {

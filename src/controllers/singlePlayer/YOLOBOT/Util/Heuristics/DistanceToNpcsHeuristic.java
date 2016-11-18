@@ -1,10 +1,10 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import ontology.Types;
 import tools.Vector2d;
-import YOLOBOT.YoloState;
-import YOLOBOT.Util.SimpleState;
-import YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
+import controllers.singlePlayer.YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.Util.SimpleState;
+import controllers.singlePlayer.YOLOBOT.Util.Wissensdatenbank.YoloKnowledge;
 import core.game.Observation;
 
 public class DistanceToNpcsHeuristic extends IModdableHeuristic {

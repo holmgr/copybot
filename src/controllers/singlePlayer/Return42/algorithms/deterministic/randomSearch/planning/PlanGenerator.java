@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.randomSearch.planning;
+package controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.planning;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -7,12 +7,12 @@ import java.util.List;
 import ontology.Types.ACTIONS;
 import ontology.Types.WINNER;
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.deterministic.randomSearch.depthControl.DepthControl;
-import Return42.algorithms.deterministic.randomSearch.rollout.heuristic.RolloutHeuristic;
-import Return42.algorithms.deterministic.randomSearch.rollout.picker.RolloutPicker;
-import Return42.algorithms.deterministic.randomSearch.rollout.strategy.RollOutStrategy;
-import Return42.util.NilMoveChecker;
-import Return42.util.StateObservationUtils;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.depthControl.DepthControl;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.heuristic.RolloutHeuristic;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.picker.RolloutPicker;
+import controllers.singlePlayer.Return42.algorithms.deterministic.randomSearch.rollout.strategy.RollOutStrategy;
+import controllers.singlePlayer.Return42.util.NilMoveChecker;
+import controllers.singlePlayer.Return42.util.StateObservationUtils;
 import core.game.StateObservation;
 
 public class PlanGenerator {

@@ -1,4 +1,4 @@
-package YOLOBOT.Util.TargedChooser;
+package controllers.singlePlayer.YOLOBOT.Util.TargedChooser;
 
 import core.game.Observation;
 

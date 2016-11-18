@@ -1,4 +1,4 @@
-package YBCriber;
+package controllers.singlePlayer.YBCriber;
 
 import core.game.Observation;
 import core.game.StateObservation;

@@ -1,8 +1,8 @@
-package Return42.heuristics.action;
+package controllers.singlePlayer.Return42.heuristics.action;
 
 import ontology.Types.ACTIONS;
-import Return42.knowledgebase.GameInformation;
-import Return42.knowledgebase.WalkableSpaceGenerator;
+import controllers.singlePlayer.Return42.knowledgebase.GameInformation;
+import controllers.singlePlayer.Return42.knowledgebase.WalkableSpaceGenerator;
 import core.game.StateObservation;
 
 public class RandomWalkableHeuristic implements ActionHeuristic {

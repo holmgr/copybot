@@ -1,4 +1,4 @@
-package YOLOBOT.Util.Planner;
+package controllers.singlePlayer.YOLOBOT.Util.Planner;
 
 import ontology.Types.ACTIONS;
 

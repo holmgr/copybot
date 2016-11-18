@@ -1,6 +1,6 @@
-package Return42.util;
+package controllers.singlePlayer.Return42.util;
 
-import Return42.hashing.ObservationHasher;
+import controllers.singlePlayer.Return42.hashing.ObservationHasher;
 import core.game.StateObservation;
 import ontology.Types;
 

@@ -1,4 +1,4 @@
-package NovTea;
+package controllers.singlePlayer.NovTea;
 
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;

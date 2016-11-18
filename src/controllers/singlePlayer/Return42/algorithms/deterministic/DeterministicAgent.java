@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic;
+package controllers.singlePlayer.Return42.algorithms.deterministic;
 
 import java.awt.Graphics2D;
 

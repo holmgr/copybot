@@ -1,4 +1,4 @@
-package Return42;
+package controllers.singlePlayer.Return42;
 
 import core.game.Observation;
 import core.game.StateObservation;

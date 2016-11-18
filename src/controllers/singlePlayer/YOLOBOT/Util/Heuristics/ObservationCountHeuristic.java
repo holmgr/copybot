@@ -1,9 +1,9 @@
-package YOLOBOT.Util.Heuristics;
+package controllers.singlePlayer.YOLOBOT.Util.Heuristics;
 
 import java.util.ArrayList;
 
 import core.game.Observation;
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public class ObservationCountHeuristic extends IHeuristic {
 

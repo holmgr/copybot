@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.puzzleSolver.costFunction;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.costFunction;
 
 import java.util.Arrays;
 import java.util.LinkedList;

@@ -1,8 +1,8 @@
-package Return42.algorithms.pattern;
+package controllers.singlePlayer.Return42.algorithms.pattern;
 
-import Return42.GameStateCache;
-import Return42.heuristics.patterns.EnemyPattern;
-import Return42.heuristics.patterns.Pattern;
+import controllers.singlePlayer.Return42.GameStateCache;
+import controllers.singlePlayer.Return42.heuristics.patterns.EnemyPattern;
+import controllers.singlePlayer.Return42.heuristics.patterns.Pattern;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 import ontology.Types;
@@ -18,7 +18,7 @@ public class Agent extends AbstractPlayer {
     public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer) {
         patterns.add(new EnemyPattern());
         patterns = getUsefulPaterns(patterns, new GameStateCache(so));
-        fallback = new Return42.algorithms.GA.Agent(so, elapsedTimer);
+        fallback = new controllers.singlePlayer.Return42.algorithms.GA.Agent(so, elapsedTimer);
     }
 
     public Types.ACTIONS act(StateObservation stateObs, ElapsedCpuTimer elapsedTimer)

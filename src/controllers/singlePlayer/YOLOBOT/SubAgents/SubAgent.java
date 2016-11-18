@@ -1,10 +1,10 @@
-package YOLOBOT.SubAgents;
+package controllers.singlePlayer.YOLOBOT.SubAgents;
 
 import java.awt.Graphics2D;
 
 import ontology.Types;
 import tools.ElapsedCpuTimer;
-import YOLOBOT.YoloState;
+import controllers.singlePlayer.YOLOBOT.YoloState;
 
 public abstract class SubAgent {
 	public SubAgentStatus Status;

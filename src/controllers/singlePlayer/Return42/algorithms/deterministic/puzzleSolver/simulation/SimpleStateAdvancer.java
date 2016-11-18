@@ -1,4 +1,4 @@
-package Return42.algorithms.deterministic.puzzleSolver.simulation;
+package controllers.singlePlayer.Return42.algorithms.deterministic.puzzleSolver.simulation;
 
 import ontology.Types.ACTIONS;
 import core.game.StateObservation;

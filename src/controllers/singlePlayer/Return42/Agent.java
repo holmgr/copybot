@@ -1,12 +1,12 @@
-package Return42;
+package controllers.singlePlayer.Return42;
 
 import java.awt.Graphics2D;
 
 import ontology.Types;
 import tools.ElapsedCpuTimer;
-import Return42.algorithms.AlgorithmPicker;
-import Return42.knowledgebase.KnowledgeBase;
-import Return42.util.CachingStateObservation;
+import controllers.singlePlayer.Return42.algorithms.AlgorithmPicker;
+import controllers.singlePlayer.Return42.knowledgebase.KnowledgeBase;
+import controllers.singlePlayer.Return42.util.CachingStateObservation;
 import core.game.StateObservation;
 import core.player.AbstractPlayer;
 
