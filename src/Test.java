@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -19,8 +20,8 @@ import java.util.stream.Collectors;
  */
 public class Test {
 
-    private static final int TRAINING_SET_SIZE = 2;
-    private static final int NUMBER_OF_LEVELS = 1;
+    private static final int TRAINING_SET_SIZE = 1;
+    private static final int NUMBER_OF_LEVELS = 5;
     private static final int NUMBER_OF_TRIES = 1;
 
     public static void main(String[] args) {
@@ -47,12 +48,13 @@ public class Test {
 
         // All controllers to test
         List<String> controllers = Arrays.asList(
-                "controllers.singlePlayer.sampleMCTS.Agent",
-                "controllers.singlePlayer.sampleFlatMCTS.Agent",
-                "controllers.singlePlayer.sampleOLMCTS.Agent",
-                "controllers.singlePlayer.sampleGA.Agent",
-                "controllers.singlePlayer.olets.Agent",
-                "controllers.singlePlayer.repeatOLETS.Agent"
+                "controllers.singlePlayer.adrienctx.Agent",
+                "controllers.singlePlayer.NovTea.Agent",
+                "controllers.singlePlayer.MaastCTS2.Agent",
+                "controllers.singlePlayer.Return42.Agent",
+                "controllers.singlePlayer.thorbjrn.Agent",
+                "controllers.singlePlayer.YBCriber.Agent",
+                "controllers.singlePlayer.YOLOBOT.Agent"
         );
 
         // Get the actual names for the controllers
@@ -77,12 +79,16 @@ public class Test {
                 "",
                 "Total"));
 
+        long testStartTime = System.nanoTime();
+
         // Do a run of all games for each controller and print the results
         for (String controller : controllers) {
 
             // Take out the name for this controller
             String name = extractControllerName(controller);
-            int[] wins = testController(controller, trainingSet);
+
+            long startTime = System.nanoTime();
+            int[] wins = testController(controller, trainingSet, TRAINING_SET_SIZE, NUMBER_OF_LEVELS, NUMBER_OF_TRIES);
 
             // Format the result as a space separated string (2 chars per result)
             String results = Arrays.stream(wins)
@@ -90,6 +96,9 @@ public class Test {
                     .reduce("", String::concat);
 
             int totalWins = Arrays.stream(wins).sum();
+
+            long duration = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - startTime);
+            System.out.printf("Finished testing controller: %s took %d seconds\n", name, duration);
 
             lines.add(String.format("%" + maxNameLength + "s:\t%s\t%s", name, results, totalWins));
         }
@@ -101,28 +110,35 @@ public class Test {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        long testDuration = TimeUnit.NANOSECONDS.toMinutes(System.nanoTime() - testStartTime);
+        System.out.printf("Entire test took: %d minutes", testDuration);
     }
 
     private static String extractControllerName(String s) {
         return s.split("\\.")[2];
     }
 
-    private static int[] testController(String controller, List<String> gameSet) {
+    public static int[] testController(String controller, List<String> gameSet, int trainingSetSize, int numberOfLevels, int numberOfTries) {
         int seed = 4; // Arbitrary random number :)
 
         String gamesPath = "examples/gridphysics/";
-        int[] wins = new int[TRAINING_SET_SIZE];
+        int[] wins = new int[trainingSetSize];
 
-        for (int j = 0; j < TRAINING_SET_SIZE; j++) {
+        for (int j = 0; j < trainingSetSize; j++) {
 
             String game = gamesPath + gameSet.get(j) + ".txt";
 
-            for (int k = 0; k < NUMBER_OF_LEVELS; ++k) {
+            for (int k = 0; k < numberOfLevels; ++k) {
 
-                for (int l = 0; l < NUMBER_OF_TRIES; l++) {
-                    String level = gamesPath + gameSet.get(j) + "_lvl" + j + ".txt";
-                    double[] results = ArcadeMachine.runOneGame(game, level, false, controller, null, seed, 0);
-                    wins[j] += (int) results[0];
+                for (int l = 0; l < numberOfTries; l++) {
+                    String level = gamesPath + gameSet.get(j) + "_lvl" + k + ".txt";
+                    try {
+                        double[] results = ArcadeMachine.runOneGame(game, level, false, controller, null, seed, 0);
+                        wins[j] += (int) results[0];
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
         }
