@@ -37,11 +37,11 @@ public class Test {
                 "eighthpassenger", "eggomania", "enemycitadel", "escape", "factorymanager",     //30-34
                 "firecaster", "fireman", "firestorms", "freeway", "frogs",                      //35-39
                 "garbagecollector", "gymkhana", "hungrybirds", "iceandfire", "ikaruga",         //40-44
-                "infection", "intersection", "islands", "jaws", "killbillVol1",                 //45-49
+                "infection", "intersection", "islands", "jaws", "killBillVol1",                 //45-49
                 "labyrinth", "labyrinthdual", "lasers", "lasers2", "lemmings",                  //50-54
                 "missilecommand", "modality", "overload", "pacman", "painter",                  //55-59
                 "pokemon", "plants", "plaqueattack", "portals", "racebet",                      //60-64
-                "raceBet2", "realportals", "realsokoban", "rivers", "roadfighter",              //65-69
+                "racebet2", "realportals", "realsokoban", "rivers", "roadfighter",              //65-69
                 "roguelike", "run", "seaquest", "sheriff", "shipwreck",                         //70-74
                 "sokoban", "solarfox", "superman", "surround", "survivezombies"                 //75-79
         );
