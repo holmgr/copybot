@@ -4,13 +4,17 @@ import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import core.game.*;
 import core.game.Event;
 import core.player.AbstractPlayer;
+import global.svm_predict;
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
 
 import java.awt.*;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.*;
@@ -38,7 +42,9 @@ public class Agent extends AbstractPlayer {
     // Use MCTS for feature collection
     private SingleMCTSPlayer mctsPlayer;
     // Name of file to write features to
-    private final static String FILENAME = "featuresTraining.txt";
+    private final static String FEATURES_FILENAME = "features.test";
+    private final static String SVM_MODEL_FILENAME = "trainingData.train.model";
+    private final static String CLASSIFIED_RESULT = "collector.ans";
     private final static double FIRST_CLASS = 0.0;
     private final static double SECOND_CLASS = 1.0;
     private final static double THIRD_CLASS = 2.0;
@@ -59,7 +65,7 @@ public class Agent extends AbstractPlayer {
      * @param so state observation of the current game.
      * @param elapsedTimer Timer for the controller creation.
      */
-    public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer)
+    public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer) throws IOException
     {
 	//Get the actions in a static array.
 	List<ACTIONS> act = so.getAvailableActions();
@@ -108,22 +114,53 @@ public class Agent extends AbstractPlayer {
 	//Init the controller used for feature collection
 	mctsPlayer.init(so);
 	//Play for max secondsToSimulate
-	final int secondsToSimulate = 6;
+	final double secondsToSimulate = 0.9;
 	while (elapsedTimer.elapsedMillis() < secondsToSimulate*1000){
 	    so.advance(actions[mctsPlayer.run(elapsedTimer)]);
 	    detectFeatures(so);
 	}
-	//System.out.println(features.toString());
+	System.out.println(features.toString());
+	String feature = features.toString();
 	try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-		new FileOutputStream(FILENAME, true), "utf-8")))
+		new FileOutputStream(FEATURES_FILENAME), "utf-8")))
 	{
-	    writer.write(features.toString() + "\n");
+	    writer.write(47 + " ");
+	    String[] splittedOnSpace = feature.split(" ");
+	    for (int i = 0; i < features.size(); i++) {
+		String[] splittedOnEqual = splittedOnSpace[i].split("=");
+		String[] splittedOnDot = splittedOnEqual[1].split("\\.");
+		String result = splittedOnDot[0];
+		if(i == 0) writer.write((i+1)+ ":" + result);
+		else writer.write(" "+ (i+1) + ":" + result);
+	    }
 	}
 	catch (Exception e){
 	    System.out.println(String.format("Got Exception: %s", e));
 	}
+	double collectorClass = -1.0;
+	svm_predict.main(new String[]{ FEATURES_FILENAME, SVM_MODEL_FILENAME, CLASSIFIED_RESULT });
+	try (BufferedReader reader = new BufferedReader(new FileReader(CLASSIFIED_RESULT))) {
+	    String ans = reader.readLine();
+	    collectorClass = Double.parseDouble(ans);
+	}
+	catch (Exception e) {
+	    System.out.println(String.format("Got Exception: %s", e));
+	}
+	System.out.println(collectorClass);
 	// Create a fresh player to use to play the game for further feature collection
 	// (possibly unneccessary)
+	if (collectorClass == 0.0) {
+
+	}
+	else if (collectorClass == 1.0) {
+
+	}
+	else if (collectorClass == 2.0) {
+
+	}
+	else {
+
+	}
 	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
     }
 
