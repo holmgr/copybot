@@ -13,13 +13,13 @@ import java.io.Writer;
  */
 public class FileCombiner
 {
-    private String features = "featuresTraining.txt";
-    private String answers = "controllersTraining.txt";
+    private String features = "featuresValidation.txt";
+    private String answers = "controllersValidation.txt";
 
     public FileCombiner() throws IOException {
 	boolean firstRun = true;
 	Writer writer = new BufferedWriter(new OutputStreamWriter(
-		new FileOutputStream("trainingData.train", true)
+		new FileOutputStream("testData.test", true)
 	));
 	BufferedReader feBr = new BufferedReader(new FileReader(features));
 	BufferedReader anBr = new BufferedReader(new FileReader(answers));
@@ -36,11 +36,11 @@ public class FileCombiner
 	    String[] splittedOnSpace = feature.split(" ");
 
 	    writer.write(answer + " ");
-	    for (int i = 0; i < 16; i++) {
-		String[] splittedOnEqual = splittedOnSpace[i].split("=");
+	    for (int i = 1; i < 17; i++) {
+		String[] splittedOnEqual = splittedOnSpace[i-1].split("=");
 		String[] splittedOnDot = splittedOnEqual[1].split("\\.");
 		String result = splittedOnDot[0];
-		if(i == 0) writer.write(i+ ":" + result);
+		if(i-1 == 0) writer.write(i+ ":" + result);
 		else writer.write(" "+ i + ":" + result);
 	    }
 
