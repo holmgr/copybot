@@ -13,13 +13,13 @@ import java.io.Writer;
  */
 public class FileCombiner
 {
-    private String features = "featuresValidation.txt";
-    private String answers = "controllersValidation.txt";
+    private String features = "featuresTraining.txt";
+    private String answers = "controllersTraining.txt";
 
     public FileCombiner() throws IOException {
 	boolean firstRun = true;
 	Writer writer = new BufferedWriter(new OutputStreamWriter(
-		new FileOutputStream("testData.test", true)
+		new FileOutputStream("trainingData.train", true)
 	));
 	BufferedReader feBr = new BufferedReader(new FileReader(features));
 	BufferedReader anBr = new BufferedReader(new FileReader(answers));
