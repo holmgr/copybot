@@ -78,13 +78,13 @@ public class Test
         int seed = new Random().nextInt();
 
         //Uncomment section below to combine features with answers of which controller to use.
-/*
+
         try {
             FileCombiner fileWriter = new FileCombiner();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
+
 
         //Game and level to play
 
@@ -114,7 +114,7 @@ public class Test
         //    ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
         // 2. This plays a game in a level by the controller.
-        ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
+      //  ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
 
 
         // 3. This replays a game from an action file previously recorded
