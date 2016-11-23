@@ -78,14 +78,22 @@ public class Test
         int seed = new Random().nextInt();
 
         //Uncomment section below to combine features with answers of which controller to use.
-
+/*
         try {
             FileCombiner fileWriter = new FileCombiner();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
+*/
+        // Uncomment section below to maximize the classification by choosing certain features.
+/*
+        try {
+            FeatureDecider featureDecider = new FeatureDecider();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+/*
         //Game and level to play
 
         int gameIdx = 0;
