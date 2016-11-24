@@ -1,12 +1,15 @@
 package controllers.singlePlayer.hyperHeuristicAgent;
 
+import controllers.singlePlayer.Heuristics.SimpleStateHeuristic;
 import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import core.game.*;
 import core.game.Event;
 import core.player.AbstractPlayer;
 import global.svm_predict;
+import ontology.Types;
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
+import tools.Utils;
 
 import java.awt.*;
 
@@ -39,16 +42,29 @@ public class Agent extends AbstractPlayer {
     private Event lastEvent = null;
     private boolean firstRun = true;
     private int canShoot = 0;
-    // Use MCTS for feature collection
-    private SingleMCTSPlayer mctsPlayer;
-    // Name of file to write features to
+
+    // Portfolio
+    private controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer mctsPlayer;
+    private controllers.singlePlayer.sampleOLMCTS.SingleMCTSPlayer olmctsPlayer;
+    private controllers.singlePlayer.sampleGA.Agent GAPlayer;
+    private int controllerClass = -1;
+    private double classificationCertainty = -1.0;
+
+    // One step look ahead members
+    public static double epsilon = 1e-6;
+    public static Random m_rnd;
+
+    // filenames
     private final static String FEATURES_FILENAME = "features.test";
-    private final static String SVM_MODEL_FILENAME = "trainingData.train.model";
-    private final static String CLASSIFIED_RESULT = "collector.ans";
+    private final static String SVM_MODEL_FILENAME = "classify.model";
+    private final static String CLASSIFIED_RESULT = "controller.ans";
+
+    // classes
     private final static double FIRST_CLASS = 0.0;
     private final static double SECOND_CLASS = 1.0;
     private final static double THIRD_CLASS = 2.0;
 
+    // class bin limits
     private static final int NUM_NPC_3RD_CLASS_LOW_LIMIT = 11;
     private static final int NUM_NPCTYPES_3RD_CLASS_LOW_LIMIT = 4;
     private static final int NUM_TYPES_RESOURCES_3RD_CLASS_LOW_LIMIT = 4;
@@ -67,6 +83,7 @@ public class Agent extends AbstractPlayer {
      */
     public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer) throws IOException
     {
+	m_rnd = new Random();
 	//Get the actions in a static array.
 	List<ACTIONS> act = so.getAvailableActions();
 	actions = new ACTIONS[act.size()];
@@ -76,9 +93,6 @@ public class Agent extends AbstractPlayer {
 	    actions[i] = act.get(i);
 	}
 	num_actions = actions.length;
-
-	//Create the player for simulation for feature collection
-	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
 
 	//Init some features
 	initFeatures();
@@ -111,21 +125,28 @@ public class Agent extends AbstractPlayer {
 	}
 	features.put("isUseAvailable", isUseAvailable+0.0);
 
-	//Init the controller used for feature collection
-	mctsPlayer.init(so);
+	System.out.println("nanos Before featureloop: " + elapsedTimer.elapsedNanos());
 	//Play for max secondsToSimulate
-	final double secondsToSimulate = 0.3;
-	while (elapsedTimer.elapsedMillis() < secondsToSimulate*1000){
-	    so.advance(actions[mctsPlayer.run(elapsedTimer)]);
+	final double secondsToSimulate = 0.9;
+	int iters = 0;
+	while (elapsedTimer.elapsedNanos() < secondsToSimulate*1000000000){
+	    so.advance(getFeatureExploringAction(so, elapsedTimer));
 	    detectFeatures(so);
+	    iters++;
 	}
-	System.out.println(features.toString());
-	String feature = features.toString();
+	System.out.println("nanos After featureloop: " + elapsedTimer.elapsedNanos());
+	System.out.println("iters done = " + iters);
+
+	String featureString = features.toString();
+	System.out.println(featureString);
+
+	// write features to file for classification
 	try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 		new FileOutputStream(FEATURES_FILENAME), "utf-8")))
 	{
+	    // write arbitrary number larger than number of classes for SVM to not take this as a training example
 	    writer.write(47 + " ");
-	    String[] splittedOnSpace = feature.split(" ");
+	    String[] splittedOnSpace = featureString.split(" ");
 	    for (int i = 0; i < features.size(); i++) {
 		String[] splittedOnEqual = splittedOnSpace[i].split("=");
 		String[] splittedOnDot = splittedOnEqual[1].split("\\.");
@@ -137,31 +158,55 @@ public class Agent extends AbstractPlayer {
 	catch (Exception e){
 	    System.out.println(String.format("Got Exception: %s", e));
 	}
-	double collectorClass = -1.0;
-	svm_predict.main(new String[]{ FEATURES_FILENAME, SVM_MODEL_FILENAME, CLASSIFIED_RESULT });
+	svm_predict.main(new String[]{ "-b", "1", FEATURES_FILENAME, SVM_MODEL_FILENAME, CLASSIFIED_RESULT });
 	try (BufferedReader reader = new BufferedReader(new FileReader(CLASSIFIED_RESULT))) {
-	    String ans = reader.readLine();
-	    collectorClass = Double.parseDouble(ans);
+	    String dummy = reader.readLine();
+	    String line = reader.readLine();
+	    String[] splitted = line.split(" ");
+	    Double classDouble = Double.parseDouble(splitted[0]);
+	    controllerClass = classDouble.intValue();
+	    classificationCertainty = Double.parseDouble(splitted[controllerClass+1]);
 	}
 	catch (Exception e) {
 	    System.out.println(String.format("Got Exception: %s", e));
 	}
-	System.out.println(collectorClass);
-	// Create a fresh player to use to play the game for further feature collection
-	// (possibly unneccessary)
-	if (collectorClass == 0.0) {
-
+	System.out.println("Choosing controller " + controllerClass + " with certainty " + classificationCertainty*100+"%");
+	switch (controllerClass) {
+	    case 0:
+		mctsPlayer = new controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer(new Random(), num_actions, actions);
+		break;
+	    case 1:
+		olmctsPlayer = new controllers.singlePlayer.sampleOLMCTS.SingleMCTSPlayer(new Random(), num_actions, actions);
+		break;
+	    case 2:
+		GAPlayer = new controllers.singlePlayer.sampleGA.Agent(so, elapsedTimer);
+		break;
+	    default:
+		System.out.println("Class was not in range.");
+		break;
 	}
-	else if (collectorClass == 1.0) {
+    }
 
-	}
-	else if (collectorClass == 2.0) {
+    private ACTIONS getFeatureExploringAction(StateObservation obs, ElapsedCpuTimer timer) {
+	Types.ACTIONS bestAction = null;
+	double maxQ = Double.NEGATIVE_INFINITY;
+	SimpleStateHeuristic heuristic =  new SimpleStateHeuristic(obs);
+	for (Types.ACTIONS action : obs.getAvailableActions()) {
 
-	}
-	else {
+	    StateObservation stCopy = obs.copy();
+	    stCopy.advance(action);
+	    double Q = heuristic.evaluateState(stCopy);
+	    Q = Utils.noise(Q, this.epsilon, this.m_rnd.nextDouble());
 
+	    //System.out.println("Action:" + action + " score:" + Q);
+	    if (Q > maxQ) {
+		maxQ = Q;
+		bestAction = action;
+	    }
 	}
-	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
+
+	//System.out.println("======== "  + maxQ + " " + bestAction + "============");
+	return bestAction;
     }
 
     /**
@@ -171,14 +216,22 @@ public class Agent extends AbstractPlayer {
      * @param elapsedTimer Timer when the action returned is due.
      * @return An action for the current state
      */
-
     @Override public ACTIONS act(final StateObservation stateObs, final ElapsedCpuTimer elapsedTimer) {
-	//Set the state observation object as the new root of the tree.
-	mctsPlayer.init(stateObs);
-
-	//Determine the action using MCTS...
-	int action = mctsPlayer.run(elapsedTimer);
-
+	int action = 0;
+	switch (controllerClass) {
+	    case 0:
+		mctsPlayer.init(stateObs);
+		action = mctsPlayer.run(elapsedTimer);
+		break;
+	    case 1:
+		olmctsPlayer.init(stateObs);
+		action = olmctsPlayer.run(elapsedTimer);
+		break;
+	    case 2:
+		return GAPlayer.act(stateObs, elapsedTimer);
+	    default:
+		break;
+	}
 	//... and return it.
 	return actions[action];
     }
