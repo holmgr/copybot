@@ -1,6 +1,11 @@
+import global.svm_predict;
+import global.svm_train;
 import jdk.nashorn.internal.ir.WhileNode;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.DoubleSummaryStatistics;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,23 +14,72 @@ import java.util.regex.Pattern;
  */
 public class FeatureDecider {
 
-    private String[] featuresAvailableTraining = {"numPlayerSprites", "numNPC", "numPortalTypes", "numTypesResources", "avatarHasResources",
-            "isResourcesAvailable", "canShoot", "numNPCTypes", "numTypesResourcesAvatar", "blockSize", "numPortals", "numMovableSprites",
-            "isUseAvailable", "canMoveVertically", "numImmovableSprites", "worldSize"};
+    private ArrayList<String> featuresAvailableTraining;
+
+    private String[] trainingFiles = {"-b", "1", "featuresTrainModified.train"};
+    private String[] predictFiles = {"-b", "1", "featuresValidationModified.train", "featuresTrainModified.train.model", "probabilityForController.out"};
+    private double bestAcc = 0;
+    private double lowestAcc = 100.0;
+    private boolean firstrun = true;
 
     public FeatureDecider() throws IOException {
         FileCombiner fc = new FileCombiner();
-        while (featuresAvailableTraining.length > 0){
-            for (int i = 0; i < featuresAvailableTraining.length; i++) {
+        initializeArray();
+        while (featuresAvailableTraining.size() > 0) {
+            int featureToRemove = -1;
+            boolean changeFeature = false;
+            for (int i = 0; i < featuresAvailableTraining.size(); i++) {
                 buildFeatureFile(i, "featuresTraining.txt", "featuresTrainModified.txt");
                 buildFeatureFile(i, "featuresValidation.txt", "featuresValidationModified.txt");
-                fc.buildFile(featuresAvailableTraining.length - 1, "featuresTrainModified.txt");
-                fc.buildFile(featuresAvailableTraining.length -1, "featuresValidationModified.txt");
-
+                fc.buildFile(featuresAvailableTraining.size() - 1, "featuresTrainModified.txt");
+                fc.buildFile(featuresAvailableTraining.size() - 1, "featuresValidationModified.txt");
+                svm_train.main(trainingFiles);
+                svm_predict.main(predictFiles);
+                changeFeature = changeFeature();
+                if(changeFeature){
+                    featureToRemove = i;
+                }
             }
-            break;
+            if(featureToRemove != -1) featuresAvailableTraining.remove(featureToRemove);
+            else break;
         }
+
+        for(String str : featuresAvailableTraining){
+            System.out.println(str);
+
+        }
+        System.out.println(bestAcc);
+
     }
+
+    private void initializeArray() {
+        featuresAvailableTraining = new ArrayList<>();
+        featuresAvailableTraining.addAll(Arrays.asList("numPlayerSprites", "numNPC", "numPortalTypes", "numTypesResources", "avatarHasResources",
+                "isResourcesAvailable", "canShoot", "numNPCTypes", "numTypesResourcesAvatar", "blockSize", "numPortals", "numMovableSprites",
+                "isUseAvailable", "canMoveVertically", "numImmovableSprites", "worldSize"));
+    }
+
+    private boolean changeFeature() throws IOException {
+        BufferedReader feBr = new BufferedReader(new FileReader("result.out"));
+        String accuracy = feBr.readLine();
+        if (firstrun){
+            bestAcc = Double.parseDouble(accuracy);
+            firstrun = false;
+        }
+
+        if(Double.parseDouble(accuracy) > bestAcc){
+            bestAcc = Double.parseDouble(accuracy);
+        }
+
+        if(Double.parseDouble(accuracy) <= lowestAcc){
+            lowestAcc = Double.parseDouble(accuracy);
+            return true;
+        }else
+            return false;
+    }
+
+
+
 
     private void buildFeatureFile(int i, String filename, String output) throws IOException {
         Writer writer = new BufferedWriter(new OutputStreamWriter(
@@ -39,11 +93,11 @@ public class FeatureDecider {
                 break;
             }
             String regex;
-            if (i == featuresAvailableTraining.length - 1) {
-                regex = ".." + featuresAvailableTraining[i] + "=.+?(?=})";
+            if (i == featuresAvailableTraining.size() - 1) {
+                regex = ".." + featuresAvailableTraining.get(i) + "=.+?(?=})";
             }
             else {
-                regex = featuresAvailableTraining[i] + "=.+?(?=[a-z])";
+                regex = featuresAvailableTraining.get(i) + "=.+?(?=[a-z])";
             }
             Pattern p = Pattern.compile(regex);
             Matcher m = p.matcher(feature);

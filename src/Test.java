@@ -86,13 +86,13 @@ public class Test
 
 */
         // Uncomment section below to maximize the classification by choosing certain features.
-/*
+
         try {
             FeatureDecider featureDecider = new FeatureDecider();
         } catch (IOException e) {
             e.printStackTrace();
         }
-/*
+
         //Game and level to play
 
         int gameIdx = 0;
