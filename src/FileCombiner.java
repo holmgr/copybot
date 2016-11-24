@@ -19,37 +19,37 @@ public class FileCombiner
     }
 
 	public void buildFile(int numberOfFeatures, String features) throws IOException {
-		boolean firstRun = true;
+        boolean firstRun = true;
 
-		String[] featureSplitted = features.split("\\.");
-		Writer writer = new BufferedWriter(new OutputStreamWriter(
-            new FileOutputStream(featureSplitted[0] + ".train", false)
+        String[] featureSplitted = features.split("\\.");
+        Writer writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(featureSplitted[0] + ".train", false)
         ));
-		BufferedReader feBr = new BufferedReader(new FileReader(features));
-		BufferedReader anBr = new BufferedReader(new FileReader(answers));
-		while(true){
+        BufferedReader feBr = new BufferedReader(new FileReader(features));
+        BufferedReader anBr = new BufferedReader(new FileReader(answers));
+        while (true) {
             // change the loop length based on how many features we have.
             String feature = feBr.readLine();
             String answer = anBr.readLine();
-            if(feature == null || answer == null){
-            break;
+            if (feature == null || answer == null) {
+                break;
             }
-            if(!firstRun) writer.write("\n");
+            if (!firstRun) writer.write("\n");
             else firstRun = false;
 
             String[] splittedOnSpace = feature.split(" ");
 
             writer.write(answer + " ");
             for (int i = 1; i < numberOfFeatures + 1; i++) {
-            String[] splittedOnEqual = splittedOnSpace[i-1].split("=");
-            String[] splittedOnDot = splittedOnEqual[1].split("\\.");
-            String result = splittedOnDot[0];
-            if(i-1 == 0) writer.write(i+ ":" + result);
-            else writer.write(" "+ i + ":" + result);
+                String[] splittedOnEqual = splittedOnSpace[i - 1].split("=");
+                String[] splittedOnDot = splittedOnEqual[1].split("\\.");
+                String result = splittedOnDot[0];
+                if (i - 1 == 0) writer.write(i + ":" + result);
+                else writer.write(" " + i + ":" + result);
             }
 
         }
-		writer.close();
-	}
+        writer.close();
+    }
 
 }
