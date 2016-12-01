@@ -1,0 +1,5 @@
+Best acc was 91.66666666666666
+numPlayerSprites
+numPortalTypes
+isUseAvailable
+canMoveVertically
