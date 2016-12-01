@@ -25,7 +25,7 @@ public class Test
     private final static String FILENAME = "bestController";
     */
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws IOException
     {
         //Available controllers:
         String sampleRandomController = "controllers.singlePlayer.sampleRandom.Agent";
@@ -73,19 +73,22 @@ public class Test
                 "zelda", "zenpuzzle" };                                                       //90, 91
 
 
+        //Uncomment this section below to parse the files where we have 5 files for each controller
+        ParsePortfolio parser = new ParsePortfolio();
+
         //Other settings
         boolean visuals = true;
         int seed = new Random().nextInt();
 
         //Uncomment section below to combine features with answers of which controller to use.
-
+/*
         try {
             FileCombiner fileWriter = new FileCombiner();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-
+*/
         //Game and level to play
 
         int gameIdx = 0;
