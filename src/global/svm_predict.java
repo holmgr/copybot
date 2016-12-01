@@ -103,17 +103,19 @@ public class svm_predict {
 					((total * sumvy - sumv * sumy) * (total * sumvy - sumv * sumy)) /
 							((total * sumvv - sumv * sumv) * (total * sumyy - sumy * sumy)) +
 					" (regression)\n");
-		} else
-			svm_predict.info("Accuracy = " + (double) correct / total * 100 +
-					"% (" + correct + "/" + total + ") (classification)\n");
+		} else {
 
-		// Own implemented code to save the Accuracy for every predict
-		Writer writer = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream("result.out", false)
+		    svm_predict.info("Accuracy = " + (double) correct / total * 100 +
+				     "% (" + correct + "/" + total + ") (classification)\n");
 
-		));
-		writer.write((double) correct / total * 100 + "");
-		writer.close();
+		    // Own implemented code to save the Accuracy for every predict
+		    Writer writer = new BufferedWriter(new OutputStreamWriter(
+			    new FileOutputStream("result.out", false)
+
+		    ));
+		    writer.write((double) correct / total * 100 + "");
+		    writer.close();
+		}
 	}
 
 	private static void exit_with_help()
