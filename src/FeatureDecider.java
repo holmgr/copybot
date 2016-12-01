@@ -29,7 +29,8 @@ public class FeatureDecider {
 	final String[] predictFiles = { "-b", "1", "-q", "featuresValidationModified.train", "featuresTrainModified.train.model",
 		"probabilityForController.out" };
 	final String[] trainingFiles = { "-b", "1", "-q", "featuresTrainModified.train" };
-	for (int i = boolArrays.size()-1; i>= 0; i--) {
+	//for (int i = boolArrays.size()-1; i>= 0; i--) {
+	for (int i = 0; i < boolArrays.size(); i++) {
 	    boolean[] bools = boolArrays.get(i);
 	    int numTrue = 0;
 	    for (boolean shouldUseFeature : bools) {
@@ -52,8 +53,8 @@ public class FeatureDecider {
 	    } catch(RuntimeException e) {
 		System.out.println(e.toString());
 	    }
-	    buildFeatureFile(bools, "featuresTraining.txt", "featuresTrainModified.txt");
-	    buildFeatureFile(bools, "featuresValidation.txt", "featuresValidationModified.txt");
+	    buildFeatureFile(bools, "featuresTrainingBinless.txt", "featuresTrainModified.txt");
+	    buildFeatureFile(bools, "featuresValidationBinless.txt", "featuresValidationModified.txt");
 
 	    BufferedReader br = new BufferedReader(new FileReader("featuresValidationModified.txt"));
 	    String lineOne = br.readLine();
