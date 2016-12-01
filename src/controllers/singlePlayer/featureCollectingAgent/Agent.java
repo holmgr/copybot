@@ -11,6 +11,10 @@ import tools.Vector2d;
 
 import java.awt.*;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.*;
 import java.util.List;
 
@@ -30,10 +34,11 @@ public class Agent extends AbstractPlayer {
     public int num_actions;
     public ACTIONS[] actions;
     // Features of a game, used for training set
-    private HashMap<String, Double> features = new HashMap<>();
+    private static HashMap<String, Double> features = new HashMap<>();
     private Event lastEvent = null;
     private boolean firstRun = true;
     private int canShoot = 0;
+    private final static String FILENAME = "features.txt";
 
     // Use MCTS for feature collection
     private SingleMCTSPlayer mctsPlayer;
@@ -87,7 +92,14 @@ public class Agent extends AbstractPlayer {
 	    detectFeatures(so);
 
 	}
-	System.out.println(features.toString());
+	try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+		new FileOutputStream(FILENAME, true), "utf-8")))
+	{
+	    writer.write(features.toString() + "\n");
+	}
+	catch (Exception e){
+	    System.out.println(String.format("Got Exception: %s", e));
+	}
 	// Create a fresh player to use to play the game for further feature collection
 	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
     }
@@ -132,6 +144,10 @@ public class Agent extends AbstractPlayer {
 	features.put("numPlayerSprites", 0.0);
 	features.put("numPortals", 0.0);
 	features.put("numPortalTypes", 0.0);
+	features.put("numTypesResources", 0.0);
+	features.put("isResourcesAvailable", 0.0);
+	features.put("numTypesResourcesAvatar", 0.0);
+	features.put("avatarHasResources", 0.0);
     }
 
     private void detectFeatures(StateObservation stateObs){
@@ -223,14 +239,22 @@ public class Agent extends AbstractPlayer {
 	    int numTypesResources = resources.length;
 	    double isResourcesAvailable = numTypesResources == 0 ?
 					  0.0 : 1.0;
-	    features.put("numTypesResources", numTypesResources+0.0);
-	    features.put("isResourcesAvailable", isResourcesAvailable);
+	    if (isResourcesAvailable > features.get("isResourcesAvailable")) {
+		features.put("isResourcesAvailable", isResourcesAvailable);
+	    }
+	    if (numTypesResources > features.get("numTypesResources")){
+		features.put("numTypesResources", numTypesResources+0.0);
+	    }
 	}
 	int numTypesResourcesAvatar = avatarResources.size();
 	double avatarHasResources = numTypesResourcesAvatar == 0 ?
 				    0.0 : 1.0;
-	features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
-	features.put("avatarHasResources", avatarHasResources);
+	if (numTypesResourcesAvatar > features.get("numTypesResourcesAvatar")) {
+	    features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
+	}
+	if (avatarHasResources > features.get("avatarHasResources")) {
+	    features.put("avatarHasResources", avatarHasResources);
+	}
     }
 
     private void tryDetectShootFeature(Set<Event> events) {
