@@ -17,7 +17,6 @@ import java.util.regex.Pattern;
 public class FeatureDecider {
 
     private ArrayList<String> featuresAvailableTraining;
-
     private double globalBestAcc = 0;
     private int bestIndex = 0;
 
@@ -126,6 +125,7 @@ public class FeatureDecider {
 		writer.write(feature + "\n");
 	    }
 	}
+
     }
 
     private void initializeArray() {
@@ -139,7 +139,7 @@ public class FeatureDecider {
 	try (BufferedReader feBr = new BufferedReader(new FileReader("result.out"))) {
 	    String accuracy = feBr.readLine();
 	    double acc = Double.parseDouble(accuracy);
-	    if(acc > globalBestAcc){
+	    if (acc > globalBestAcc) {
 		globalBestAcc = acc;
 		bestIndex = currIndex;
 
@@ -152,6 +152,7 @@ public class FeatureDecider {
 	    System.out.println("curr acc was " + acc + " curr best is " + globalBestAcc);
 	}
     }
+
 
     private void buildFeatureFile(boolean[] indexes, String filenameIn, String filenameOut) throws IOException {
 	Writer writer = new BufferedWriter(new OutputStreamWriter(
