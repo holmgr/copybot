@@ -13,8 +13,8 @@ import java.io.Writer;
  */
 public class FileCombiner
 {
-    private String answers = "controllersTraining.txt";
-    private String answersVal = "controllersValidation.txt";
+    private String answers = "newControllersTraining.txt";
+    private String answersVal = "newControllersValidation.txt";
 
     public FileCombiner() throws IOException {
     }
