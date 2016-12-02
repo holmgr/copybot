@@ -26,6 +26,7 @@ public class ParsePortfolio
     */
 
     public ParsePortfolio() throws IOException {
+	//TODO change the ORDERING OF CONTROLLERS BECAUSE WE SHOULD NOT COUNT YOLOBOT AS MINUS RESULT
 	String[] controllers = { "MaastCTS2", "YBCriber", "thorbjrn", "NovTea", "adrienctx", "Return42", "YOLOBOT" };
 	ArrayList<int[]> controllersResult = new ArrayList<int[]>();
 
