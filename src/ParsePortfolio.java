@@ -16,41 +16,39 @@ public class ParsePortfolio
 
     //total wins
     /*
+    YOLOBOT 881
     MAASTSCTS 871
     YBcriber 842
+    return42 774
     thorbjorn 766
     NovTea 734
     adrien 626
-    return42 574
-    YOLOBOT -1019
     */
 
     public ParsePortfolio() throws IOException {
-	//TODO change the ORDERING OF CONTROLLERS BECAUSE WE SHOULD NOT COUNT YOLOBOT AS MINUS RESULT
-	String[] controllers = { "MaastCTS2", "YBCriber", "thorbjrn", "NovTea", "adrienctx", "Return42", "YOLOBOT" };
+	String[] controllers = { "YOLOBOT", "MaastCTS2", "YBCriber","Return42" , "thorbjrn", "NovTea", "adrienctx" };
 	ArrayList<int[]> controllersResult = new ArrayList<int[]>();
 
-	//initialize controllersResult with arrays that can contain 80 ints.
+	//initialize controllersResult with arrays that can contain x ints.
+	int games = 12;
 	for (int i = 0; i < controllers.length; i++) {
-	    controllersResult.add(new int[80]);
+	    controllersResult.add(new int[games]);
 	}
 
 	//iterate all controllers, 5 time each to get every txt file.
 	for (int i = 0; i < controllers.length; i++) {
-	    for (int j = 1; j < 6; j++) {
-		String filename;
-		if (j == 1) {
-		    filename = controllers[i] + ".txt";
-		} else {
-		    filename = controllers[i] + j + ".txt";
-		}
+	    for (int j = 0; j < 5; j++) {
+		String filename = "validation-" + controllers[i] + j + ".txt";
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
-		String[] elements = reader.readLine().split("   ");
+		String[] elements = reader.readLine().split(" ");
 
+		int game = 0;
 		//add all numbers into the controllers result list
 		for (int k = 0; k < elements.length; k++) {
+		    if (elements[k].isEmpty()) continue;
 		    //if(i == 6 && k == 68) System.out.println(elements[k]);
-		    controllersResult.get(i)[k] += Integer.parseInt(elements[k]);
+		    controllersResult.get(i)[game] += Integer.parseInt(elements[k]);
+		    game++;
 		}
 
 	    }
@@ -81,7 +79,7 @@ public class ParsePortfolio
 	}
 	// Time to write the index of the controller that has the most number of wins in one game over all 5 tries.
 	Writer writer = new BufferedWriter(new OutputStreamWriter(
-		new FileOutputStream("trainingAsnwers.txt", false)
+		new FileOutputStream("validationAsnwers.txt", false)
 	));
 	for(int bestController : finalResult){
 	    writer.write(bestController + "\n");
