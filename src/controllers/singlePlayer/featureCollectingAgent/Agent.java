@@ -4,8 +4,10 @@ import controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer;
 import core.game.*;
 import core.game.Event;
 import core.player.AbstractPlayer;
+import ontology.Types;
 import ontology.Types.ACTIONS;
 import tools.ElapsedCpuTimer;
+import tools.Vector2d;
 
 import java.awt.*;
 
@@ -25,35 +27,22 @@ import java.util.TreeSet;
 
 
 /**
- * Agent 007
+ *
  */
 public class Agent extends AbstractPlayer {
+
     public int num_actions;
     public ACTIONS[] actions;
     // Features of a game, used for training set
-    private static HashMap<String, Double> features = new HashMap<>();
+    private HashMap<String, Double> features = new HashMap<>();
     private Event lastEvent = null;
     private boolean firstRun = true;
     private int canShoot = 0;
+    private final static String FILENAME = "features.txt";
 
     // Use MCTS for feature collection
     private SingleMCTSPlayer mctsPlayer;
-    // Name of file to write features to
-    private final static String FILENAME = "featuresTraining.txt";
-    private final static double FIRST_CLASS = 0.0;
-    private final static double SECOND_CLASS = 1.0;
-    private final static double THIRD_CLASS = 2.0;
 
-    private static final int NUM_NPC_3RD_CLASS_LOW_LIMIT = 11;
-    private static final int NUM_NPCTYPES_3RD_CLASS_LOW_LIMIT = 4;
-    private static final int NUM_TYPES_RESOURCES_3RD_CLASS_LOW_LIMIT = 4;
-    private static final int BLOCKSIZE_2ND_CLASS_LOWER_LIMIT = 40;
-    private static final int WORLDSIZE_2ND_CLASS_LOWER_LIMIT = 30000;
-    private static final int NUM_PORTALS_3RD_CLASS_LOW_LIMIT = 2;
-    private static final int NUM_PORTALTYPES_3RD_CLASS_LOW_LIMIT = 2;
-    private static final int NUM_IMMOV_SPRITES_2ND_CLASS_LOW_LIMIT = 3;
-    private static final int NUM_MOV_SPRITES_2ND_CLASS_LOW_LIMIT = 3;
-    private static final int NUM_PLAYER_SPRITES_2ND_CLASS_LOW_LIMIT = 1;
 
     /**
      * Public constructor with state observation and time due.
@@ -80,41 +69,29 @@ public class Agent extends AbstractPlayer {
 
 	//Collect features
 	Dimension dim = so.getWorldDimension();
-	double worldSize = dim.getHeight()*dim.getWidth();
-	double worldSizeClass = FIRST_CLASS;
-	if (worldSize >= WORLDSIZE_2ND_CLASS_LOWER_LIMIT) {
-	    worldSizeClass = SECOND_CLASS;
-	}
-	features.put("worldSize", worldSizeClass);
-
+	double size = dim.getHeight()*dim.getWidth();
 	int blockSize = so.getBlockSize();
-	double blockSizeClass = FIRST_CLASS;
-	if (blockSize >= BLOCKSIZE_2ND_CLASS_LOWER_LIMIT) {
-	    blockSizeClass = SECOND_CLASS;
-	}
-	features.put("blockSize", blockSizeClass);
+	int canMoveVertically = 0;
+	int isUseAvailable = 0;
 
 	//Are different actions available
-	int canMoveVertically = 0;
 	if(act.contains(ACTIONS.ACTION_DOWN) && act.contains(ACTIONS.ACTION_UP)){
 	    canMoveVertically = 1;
 	}
-	features.put("canMoveVertically", canMoveVertically+0.0);
-	int isUseAvailable = 0;
 	if(act.contains(ACTIONS.ACTION_USE)) {
 	    isUseAvailable = 1;
 	}
 	features.put("isUseAvailable", isUseAvailable+0.0);
+	features.put("canMoveVertically", canMoveVertically +0.0);
+	features.put("worldSize", size);
+	features.put("blockSize", blockSize+0.0);
 
-	//Init the controller used for feature collection
 	mctsPlayer.init(so);
-	//Play for max secondsToSimulate
-	final int secondsToSimulate = 6;
-	while (elapsedTimer.elapsedMillis() < secondsToSimulate*1000){
+	while (elapsedTimer.elapsedMillis() < 6000){
 	    so.advance(actions[mctsPlayer.run(elapsedTimer)]);
 	    detectFeatures(so);
-	}
 
+	}
 	try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 		new FileOutputStream(FILENAME, true), "utf-8")))
 	{
@@ -124,7 +101,6 @@ public class Agent extends AbstractPlayer {
 	    System.out.println(String.format("Got Exception: %s", e));
 	}
 	// Create a fresh player to use to play the game for further feature collection
-	// (possibly unneccessary)
 	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
     }
 
@@ -160,9 +136,10 @@ public class Agent extends AbstractPlayer {
 	//System.out.println("Game over? " + stateObservation.isGameOver());
     }
 
-    /**
-     * Init features that we can assume as 0 initially
-     */
+    public HashMap<String, Double> getFeatures() {
+	return features;
+    }
+
     private void initFeatures(){
 	features.put("numNPCTypes", 0.0);
 	features.put("numNPC", 0.0);
@@ -177,10 +154,6 @@ public class Agent extends AbstractPlayer {
 	features.put("avatarHasResources", 0.0);
     }
 
-    /**
-     * Detect features in the current state observation
-     * @param stateObs state observation object we use to analyze features
-     */
     private void detectFeatures(StateObservation stateObs){
 	ArrayList<Observation>[] portalTypes = stateObs.getPortalsPositions();
 	detectPortalFeatures(portalTypes);
@@ -202,126 +175,69 @@ public class Agent extends AbstractPlayer {
     }
 
     /**
-     * Analyze the number of Portal types and the total number of portals.
+     * Get the number of Portal types and the total number of portals.
+     *
      */
     private void detectPortalFeatures(List<Observation>[] portalTypes) {
-	int numPortals = 0;
-	int numPortalTypes = 0;
+	double numPortals = 0.0;
+	double numPortalTypes = 0.0;
 
 	if (portalTypes != null) {
 	    numPortalTypes = portalTypes.length;
 	    for (List<Observation> portalType : portalTypes) numPortals += portalType.size();
 	}
-
-	double numPortalsClass = FIRST_CLASS;
-	if(numPortals > NUM_PORTALS_3RD_CLASS_LOW_LIMIT){
-	    numPortalsClass = THIRD_CLASS;
+	if(numPortals > features.get("numPortals")){
+	    features.put("numPortals", numPortals);
 	}
-	else if (numPortals != 0){
-	    numPortalsClass = SECOND_CLASS;
-	}
-	if (numPortalsClass > features.get("numPortals")){
-	    features.put("numPortals", numPortalsClass);
-	}
-
-	double numPortalTypesClass = FIRST_CLASS;
-	if(numPortalTypes > NUM_PORTALTYPES_3RD_CLASS_LOW_LIMIT){
-	    numPortalTypesClass = THIRD_CLASS;
-	}
-	else if (numPortalTypes != 0){
-	    numPortalTypesClass = SECOND_CLASS;
-	}
-	if (numPortalTypesClass > features.get("numPortalTypes")){
-	    features.put("numPortalTypes", numPortalTypesClass);
+	if(numPortalTypes > features.get("numPortalTypes")){
+	    features.put("numPortalTypes", numPortalTypes);
 	}
     }
 
     /**
-     * Analyze the number of NPC types and the total number of NPC in the game.
+     * Get the number of NPC types and the total number of NPC in the game.
      */
     private void detectNPCFeatures(List<Observation>[] NPCTypes) {
-	int numNPC = 0;
-	int numNPCTypes = 0;
+	double numNPC = 0.0;
+	double numNPCTypes = 0.0;
 
 	if (NPCTypes != null) {
 	    numNPCTypes = NPCTypes.length;
 	    for (List<Observation> NPCType : NPCTypes) numNPC += NPCType.size();
 	}
-
-	double numNpcClass = FIRST_CLASS;
-	if (numNPC >= NUM_NPC_3RD_CLASS_LOW_LIMIT) {
-	    numNpcClass = THIRD_CLASS;
+	if(numNPC > features.get("numNPC")){
+	    features.put("numNPC", numNPC);
 	}
-	else if (numNPC != 0) {
-	    numNpcClass = SECOND_CLASS;
-	}
-	if(numNpcClass > features.get("numNPC")){
-	    features.put("numNPC", numNpcClass);
-	}
-
-	double numNpcTypesClass = FIRST_CLASS;
-	if (numNPCTypes >= NUM_NPCTYPES_3RD_CLASS_LOW_LIMIT) {
-	    numNpcTypesClass = THIRD_CLASS;
-	}
-	else if (numNPCTypes != 0) {
-	    numNpcTypesClass = SECOND_CLASS;
-	}
-	if(numNpcTypesClass > features.get("numNPCTypes")){
-	    features.put("numNPCTypes", numNpcTypesClass);
+	if(numNPCTypes > features.get("numNPCTypes")){
+	    features.put("numNPCTypes", numNPCTypes);
 	}
     }
 
-    /**
-     * Analyze the number of different sprite
-     * @param immovableTypes array of ArrayLists where each ArrayList contains observations
-     *                       of a certain type of immovable sprites
-     * @param movableTypes array of ArrayLists where each ArrayList contains observations
-     *                     of a certain type of movable spirtes
-     * @param spritesTypesByPlayer array of ArrayLists where each ArrayList contains observations
-     *                             of a certain type of sprites created by the player (avatar)
-     */
     private void detectSpriteFeatures(List<Observation>[] immovableTypes, List<Observation>[] movableTypes,
 				      List<Observation>[] spritesTypesByPlayer) {
-	int numImmovableSprites = 0;
-	int numMovableSprites = 0;
-	int numPlayerSprites = 0;
+	double numImmovableSprites = 0.0;
+	double numMovableSprites = 0.0;
+	double numPlayerSprites = 0.0;
 
-	// Get the number of types of immovable sprites.
+	// Get the number if types of immovable sprites.
 	if (immovableTypes != null) numImmovableSprites = immovableTypes.length;
-	double numImmovableSpritesClass = FIRST_CLASS;
-	if (numImmovableSprites > NUM_IMMOV_SPRITES_2ND_CLASS_LOW_LIMIT) {
-	    numImmovableSpritesClass = SECOND_CLASS;
-	}
-	if(numImmovableSpritesClass > features.get("numImmovableSprites")) {
-	    features.put("numImmovableSprites", numImmovableSpritesClass);
+	if(numImmovableSprites > features.get("numImmovableSprites")) {
+	    features.put("numImmovableSprites", numImmovableSprites);
 	}
 
 	// Get the number of types of movable sprites (NOT NPC).
 	if (movableTypes != null) numMovableSprites = movableTypes.length;
-	double numMovableSpritesClass = FIRST_CLASS;
-	if (numMovableSprites > NUM_MOV_SPRITES_2ND_CLASS_LOW_LIMIT) {
-	    numMovableSpritesClass = SECOND_CLASS;
-	}
-	if(numMovableSpritesClass > features.get("numMovableSprites")) {
-	    features.put("numMovableSprites", numMovableSpritesClass);
+	if(numMovableSprites > features.get("numMovableSprites")){
+	    features.put("numMovableSprites", numMovableSprites);
 	}
 
 	// Get the number of types of sprites that are created by the player.
 	if (spritesTypesByPlayer != null) numPlayerSprites = spritesTypesByPlayer.length;
-	double numPlayerSpritesClass = FIRST_CLASS;
-	if (numPlayerSprites > NUM_PLAYER_SPRITES_2ND_CLASS_LOW_LIMIT){
-	    numPlayerSpritesClass = SECOND_CLASS;
-	}
-	if(numPlayerSpritesClass > features.get("numPlayerSprites")){
-	    features.put("numPlayerSprites", numPlayerSpritesClass);
+	if(numPlayerSprites > features.get("numPlayerSprites")){
+	    features.put("numPlayerSprites", numPlayerSprites);
 	}
     }
 
-    /**
-     * Analyze resources in the game
-     * @param resources Array of ArrayLists where each ArrayList contains all observation of certain type of resource
-     * @param avatarResources A map where keyset is type of resource and value is how many of that type the avatar has
-     */
     private void detectResourceFeatures(List<Observation>[] resources, Map<Integer, Integer> avatarResources ) {
 	if (resources != null){
 	    int numTypesResources = resources.length;
@@ -345,27 +261,18 @@ public class Agent extends AbstractPlayer {
 	}
     }
 
-    /**
-     * Analyze whether avatar can shoot with the USE action
-     * @param events All events that have occured (collisions)
-     */
-    private void tryDetectShootFeature(Collection<Event> events) {
+    private void tryDetectShootFeature(Set<Event> events) {
 	if (firstRun && !events.isEmpty()) {
 	    checkEventsForCollision(events);
 	    firstRun = false;
 	} else if (!events.isEmpty()) {
-	    // all events that occured after lastEvent
 	    SortedSet<Event> newEvents = ((TreeSet)events).tailSet(lastEvent);
 	    checkEventsForCollision(newEvents);
 	}
 	features.put("canShoot", canShoot+0.0);
     }
 
-    /**
-     * Find out if any coliision event has occured with a sprite created by avatar
-     * @param events A set of events we will check
-     */
-    private void checkEventsForCollision(Iterable<Event> events){
+    private void checkEventsForCollision(Set<Event> events){
 	for (Event event : events) {
 	    lastEvent = event;
 	    if (event.fromAvatar) {
