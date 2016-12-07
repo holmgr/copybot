@@ -33,9 +33,9 @@ public class FileCombiner
 	    if(!firstRun) writer.write("\n");
 	    else firstRun = false;
 
-	    String[] splittedOnSpace = feature.split(" ");
-
 	    writer.write(answer + " ");
+
+	    String[] splittedOnSpace = feature.split(" ");
 	    for (int i = 1; i < 17; i++) {
 		String[] splittedOnEqual = splittedOnSpace[i-1].split("=");
 		String[] splittedOnDot = splittedOnEqual[1].split("\\.");
@@ -43,7 +43,6 @@ public class FileCombiner
 		if(i-1 == 0) writer.write(i+ ":" + result);
 		else writer.write(" "+ i + ":" + result);
 	    }
-
 	}
 	writer.close();
     }

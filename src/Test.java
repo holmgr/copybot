@@ -18,7 +18,6 @@ import tools.StatSummary;
  */
 public class Test
 {
-
     // Uncomment below to compare what games fit to which controller
     /*
     private static Stats[][] gameToController = new Stats[83][6];
@@ -99,10 +98,10 @@ public class Test
 
 	}
         */
-
-
+	
 	// 1. This starts a game, in a level, played by a human.
 	//    ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
+
 
 	// 2. This plays a game in a level by the controller.
 	//    ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
