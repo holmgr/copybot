@@ -1,8 +1,11 @@
+// OLD //
 Best acc was 91.66666666666666
 numPlayerSprites
 numPortalTypes
 isUseAvailable
 canMoveVertically
+
+// NEW //
 Best acc was 41.66666666666667
 Using index 549
 numPlayerSprites
