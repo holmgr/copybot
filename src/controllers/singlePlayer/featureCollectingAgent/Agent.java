@@ -35,6 +35,7 @@ public class Agent extends AbstractPlayer {
     private Event lastEvent = null;
     private boolean firstRun = true;
     private int canShoot = 0;
+
     // Use MCTS for feature collection
     private SingleMCTSPlayer mctsPlayer;
     // Name of file to write features to
@@ -113,7 +114,7 @@ public class Agent extends AbstractPlayer {
 	    so.advance(actions[mctsPlayer.run(elapsedTimer)]);
 	    detectFeatures(so);
 	}
-	//System.out.println(features.toString());
+
 	try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 		new FileOutputStream(FILENAME, true), "utf-8")))
 	{
@@ -326,23 +327,20 @@ public class Agent extends AbstractPlayer {
 	    int numTypesResources = resources.length;
 	    double isResourcesAvailable = numTypesResources == 0 ?
 					  0.0 : 1.0;
-	    double numTypesResourcesClass = FIRST_CLASS;
-	    if (numTypesResources >= NUM_TYPES_RESOURCES_3RD_CLASS_LOW_LIMIT){
-		numTypesResourcesClass = THIRD_CLASS;
-	    }
-	    else if (numTypesResources != 0) {
-		numTypesResourcesClass = SECOND_CLASS;
-	    }
-	    features.put("numTypesResources", numTypesResourcesClass);
-	    if (isResourcesAvailable > features.get("isResourcesAvailable"))
+	    if (isResourcesAvailable > features.get("isResourcesAvailable")) {
 		features.put("isResourcesAvailable", isResourcesAvailable);
+	    }
+	    if (numTypesResources > features.get("numTypesResources")){
+		features.put("numTypesResources", numTypesResources+0.0);
+	    }
 	}
 	int numTypesResourcesAvatar = avatarResources.size();
-	double avatarHasResources = numTypesResourcesAvatar == 0 ? 0.0 : 1.0;
-	if (numTypesResourcesAvatar+0.0 > features.get("numTypesResourcesAvatar")){
+	double avatarHasResources = numTypesResourcesAvatar == 0 ?
+				    0.0 : 1.0;
+	if (numTypesResourcesAvatar > features.get("numTypesResourcesAvatar")) {
 	    features.put("numTypesResourcesAvatar", numTypesResourcesAvatar+0.0);
 	}
-	if (avatarHasResources > features.get("avatarHasResources")){
+	if (avatarHasResources > features.get("avatarHasResources")) {
 	    features.put("avatarHasResources", avatarHasResources);
 	}
     }
