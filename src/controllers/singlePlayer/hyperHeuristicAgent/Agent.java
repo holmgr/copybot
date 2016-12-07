@@ -45,8 +45,6 @@ public class Agent extends AbstractPlayer {
 
     // Portfolio
     private controllers.singlePlayer.sampleMCTS.SingleMCTSPlayer mctsPlayer;
-    private controllers.singlePlayer.sampleOLMCTS.SingleMCTSPlayer olmctsPlayer;
-    private controllers.singlePlayer.sampleGA.Agent GAPlayer;
     private int controllerClass = -1;
     private double classificationCertainty = -1.0;
 
@@ -55,26 +53,9 @@ public class Agent extends AbstractPlayer {
     public static Random m_rnd;
 
     // filenames
-    private final static String FEATURES_FILENAME = "features.test";
+    private final static String FEATURES_FILENAME = "featur.es";
     private final static String SVM_MODEL_FILENAME = "classify.model";
     private final static String CLASSIFIED_RESULT = "controller.ans";
-
-    // classes
-    private final static double FIRST_CLASS = 0.0;
-    private final static double SECOND_CLASS = 1.0;
-    private final static double THIRD_CLASS = 2.0;
-
-    // class bin limits
-    private static final int NUM_NPC_3RD_CLASS_LOW_LIMIT = 11;
-    private static final int NUM_NPCTYPES_3RD_CLASS_LOW_LIMIT = 4;
-    private static final int NUM_TYPES_RESOURCES_3RD_CLASS_LOW_LIMIT = 4;
-    private static final int BLOCKSIZE_2ND_CLASS_LOWER_LIMIT = 40;
-    private static final int WORLDSIZE_2ND_CLASS_LOWER_LIMIT = 30000;
-    private static final int NUM_PORTALS_3RD_CLASS_LOW_LIMIT = 2;
-    private static final int NUM_PORTALTYPES_3RD_CLASS_LOW_LIMIT = 2;
-    private static final int NUM_IMMOV_SPRITES_2ND_CLASS_LOW_LIMIT = 3;
-    private static final int NUM_MOV_SPRITES_2ND_CLASS_LOW_LIMIT = 3;
-    private static final int NUM_PLAYER_SPRITES_2ND_CLASS_LOW_LIMIT = 1;
 
     /**
      * Public constructor with state observation and time due.
@@ -87,7 +68,6 @@ public class Agent extends AbstractPlayer {
 	//Get the actions in a static array.
 	List<ACTIONS> act = so.getAvailableActions();
 	actions = new ACTIONS[act.size()];
-
 	for(int i = 0; i < actions.length; ++i)
 	{
 	    actions[i] = act.get(i);
@@ -96,7 +76,6 @@ public class Agent extends AbstractPlayer {
 
 	//Init some features
 	initFeatures();
-
 	//Collect features
 	Dimension dim = so.getWorldDimension();
 	double worldSize = dim.getHeight()*dim.getWidth();
