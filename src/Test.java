@@ -47,9 +47,13 @@ public class Test
 	String sampleGAController = "controllers.singlePlayer.sampleGA.Agent";
 	String sampleOLETSController = "controllers.singlePlayer.olets.Agent";
 	String repeatOLETS = "controllers.singlePlayer.repeatOLETS.Agent";
+	String YoloBOT = "controllers.singlePlayer.YOLOBOT.Agent";
 
         // Our agent that is used to collect features and save them
         String featureCollectingController = "controllers.singlePlayer.featureCollectingAgent.Agent";
+
+	// Our Hyper Heuristic Agent
+	String hyperHeuristicController = "controllers.singlePlayer.hyperHeuristicAgent.Agent";
 
 	//Available Generators
 	String randomLevelGenerator = "levelGenerators.randomLevelGenerator.LevelGenerator";
@@ -89,8 +93,8 @@ public class Test
 
 	//Game and level to play
 
-	int gameIdx = 0;
-	int levelIdx = 4; //level names from 0 to 4 (game_lvlN.txt).
+	int gameIdx = 56;
+	int levelIdx = 0; //level names from 0 to 4 (game_lvlN.txt).
 
 	String game = gamesPath + games[gameIdx] + ".txt";
 	String level1 = gamesPath + games[gameIdx] + "_lvl" + levelIdx +".txt";
@@ -115,7 +119,7 @@ public class Test
 
 
 	// 2. This plays a game in a level by the controller.
-	//    ArcadeMachine.runOneGame(game, level1, visuals, featureCollectingController, recordActionsFile, seed, 0);
+	    ArcadeMachine.runOneGame(game, level1, visuals, hyperHeuristicController, recordActionsFile, seed, 0);
 
 	// 3. This replays a game from an action file previously recorded
 	//String readActionsFile = recordActionsFile;

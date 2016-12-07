@@ -43,6 +43,8 @@ public class Agent extends AbstractPlayer {
     // Use MCTS for feature collection
     private SingleMCTSPlayer mctsPlayer;
 
+    private AbstractPlayer featureCollector = null;
+
 
     /**
      * Public constructor with state observation and time due.
@@ -62,7 +64,8 @@ public class Agent extends AbstractPlayer {
 	num_actions = actions.length;
 
 	//Create the player for simulation for feature collection
-	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
+	//mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
+	featureCollector = new controllers.singlePlayer.sampleonesteplookahead.Agent(so, elapsedTimer);
 
 	//Init some features
 	initFeatures();
@@ -86,11 +89,10 @@ public class Agent extends AbstractPlayer {
 	features.put("worldSize", size);
 	features.put("blockSize", blockSize+0.0);
 
-	mctsPlayer.init(so);
+	//mctsPlayer.init(so);
 	while (elapsedTimer.elapsedMillis() < 6000){
-	    so.advance(actions[mctsPlayer.run(elapsedTimer)]);
+	    so.advance(featureCollector.act(so, elapsedTimer));
 	    detectFeatures(so);
-
 	}
 	try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 		new FileOutputStream(FILENAME, true), "utf-8")))
@@ -101,7 +103,7 @@ public class Agent extends AbstractPlayer {
 	    System.out.println(String.format("Got Exception: %s", e));
 	}
 	// Create a fresh player to use to play the game for further feature collection
-	mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
+	// mctsPlayer = new SingleMCTSPlayer(new Random(), num_actions, actions);
     }
 
     /**

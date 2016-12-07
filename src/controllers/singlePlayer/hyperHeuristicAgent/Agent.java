@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -21,6 +22,13 @@ import java.util.Map;
  * Agent 007
  */
 public class Agent extends AbstractPlayer {
+
+    HashMap<Integer, String> controllersMap = new HashMap<Integer, String>() {{
+        put(0,"Yolobot");
+	put(1, "YBCriber");
+	put(2, "thorbjrn");
+	put(3, "NovTea");
+    }};
 
     // Selected agent from portfolio
     private AbstractPlayer chosenAgent = null;
@@ -40,8 +48,9 @@ public class Agent extends AbstractPlayer {
      */
     public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer) throws IOException
     {
+	StateObservation obsCopy = so.copy();
 	final controllers.singlePlayer.featureCollectingAgent.Agent featureCollectingAgent =
-		new controllers.singlePlayer.featureCollectingAgent.Agent(so, elapsedTimer);
+		new controllers.singlePlayer.featureCollectingAgent.Agent(obsCopy, elapsedTimer);
 	Map<String, Double> features = featureCollectingAgent.getFeatures();
 	String featureString = features.toString();
 	System.out.println(featureString);
@@ -80,7 +89,7 @@ public class Agent extends AbstractPlayer {
 	catch (Exception e) {
 	    System.out.println(String.format("Got Exception: %s", e));
 	}
-	System.out.println("Choosing controller " + controllerClass + " with certainty " + classificationCertainty *100+"%");
+	System.out.println("Choosing controller " + controllersMap.get(controllerClass) + " with certainty " + classificationCertainty *100+"%");
 	switch (controllerClass) {
 	    case 0:
 		chosenAgent = new controllers.singlePlayer.YOLOBOT.Agent(so, elapsedTimer);
