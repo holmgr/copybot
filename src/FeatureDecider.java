@@ -98,9 +98,11 @@ public class FeatureDecider {
         System.out.println("Optimally use " + bestFeatures.size() + " features");
         bestFeatures.forEach(System.out::println);
         System.out.println("best acc was " + globalBestAcc);
+        System.out.println("best index was " + bestIndex);
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("bestFeaturesToUse.txt", true)))) {
             writer.write("Best acc was " + globalBestAcc + "\n");
+            writer.write("Using index " + bestIndex + "\n");
             for (String feature : bestFeatures) {
                 writer.write(feature + "\n");
             }

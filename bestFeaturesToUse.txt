@@ -3,3 +3,17 @@ numPlayerSprites
 numPortalTypes
 isUseAvailable
 canMoveVertically
+Best acc was 41.66666666666667
+Using index 549
+numPlayerSprites
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numMovableSprites
+isUseAvailable
+numImmovableSprites
