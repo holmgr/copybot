@@ -18,7 +18,8 @@ public class FeatureDecider {
 
     private ArrayList<String> featuresAvailableTraining;
     private double globalBestAcc = 0;
-    private int bestIndex = 0;
+    //private int bestIndex = 0;
+    private ArrayList<Integer> bestIndexes = new ArrayList<>();
 
     public FeatureDecider() throws IOException {
         final ArrayList<boolean[]> boolArrays = buildBoolArrays(16);
@@ -43,14 +44,14 @@ public class FeatureDecider {
             int filesDeleted = 0;
             try {
                 File f = new File("featuresTrainModified.txt");
-                if (f.delete()){
+                if (f.delete()) {
                     filesDeleted++;
                 }
                 f = new File("featuresValidationModified.txt");
-                if (f.delete()){
+                if (f.delete()) {
                     filesDeleted++;
                 }
-            } catch(RuntimeException e) {
+            } catch (RuntimeException e) {
                 System.out.println(e.toString());
             }
             buildFeatureFile(bools, "featuresTrainingBinless.txt", "featuresTrainModified.txt");
@@ -63,19 +64,19 @@ public class FeatureDecider {
 
             try {
                 File f = new File("featuresTrainModified.train");
-                if (f.delete()){
+                if (f.delete()) {
                     filesDeleted++;
                 }
                 f = new File("featuresValidationModified.train");
 
-                if (f.delete()){
+                if (f.delete()) {
                     filesDeleted++;
                 }
-            } catch(RuntimeException e) {
+            } catch (RuntimeException e) {
                 System.out.println(e.toString());
             }
 
-            if(filesDeleted!=4){
+            if (filesDeleted != 4) {
                 System.out.println("DIDNT DELETE ALL FILES");
             }
 
@@ -87,29 +88,30 @@ public class FeatureDecider {
             System.out.println("finished iter " + iters);
             iters++;
         }
-        ArrayList<String> bestFeatures = new ArrayList<>();
-        boolean[] best = boolArrays.get(bestIndex);
-        for (int i = 0; i < best.length; i++) {
-            if (best[i]) {
-                bestFeatures.add(featuresAvailableTraining.get(i));
+        for (int bestIndex : bestIndexes) {
+            ArrayList<String> bestFeatures = new ArrayList<>();
+            boolean[] best = boolArrays.get(bestIndex);
+            for (int i = 0; i < best.length; i++) {
+                if (best[i]) {
+                    bestFeatures.add(featuresAvailableTraining.get(i));
+                }
             }
-        }
 
-        System.out.println("Optimally use " + bestFeatures.size() + " features");
-        bestFeatures.forEach(System.out::println);
-        System.out.println("best acc was " + globalBestAcc);
-        System.out.println("best index was " + bestIndex);
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream("bestFeaturesToUse.txt", true)))) {
-            writer.write("Best acc was " + globalBestAcc + "\n");
-            writer.write("Using index " + bestIndex + "\n");
-            for (String feature : bestFeatures) {
-                writer.write(feature + "\n");
+            System.out.println("Optimally use " + bestFeatures.size() + " features");
+            bestFeatures.forEach(System.out::println);
+            System.out.println("best acc was " + globalBestAcc);
+            System.out.println("best index was " + bestIndex);
+            try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("bestFeaturesToUse.txt", true)))) {
+                writer.write("Best acc was " + globalBestAcc + "\n");
+                writer.write("Using index " + bestIndex + "\n");
+                for (String feature : bestFeatures) {
+                    writer.write(feature + "\n");
+                }
+                writer.write("\n");
             }
-        }
 
+        }
     }
-
     private void initializeArray() {
         featuresAvailableTraining = new ArrayList<>();
         featuresAvailableTraining.addAll(Arrays.asList("numPlayerSprites", "numNPC", "numPortalTypes", "numTypesResources", "avatarHasResources",
@@ -123,13 +125,16 @@ public class FeatureDecider {
             double acc = Double.parseDouble(accuracy);
             if (acc > globalBestAcc) {
                 globalBestAcc = acc;
-                bestIndex = currIndex;
-
+               // bestIndex = currIndex;
+                bestIndexes = new ArrayList<>();
+                bestIndexes.add(currIndex);
                 File source = new File("featuresTrainModified.train");
                 Path sourcep = source.toPath();
                 File dest = new File("BESTfeaturesTrainModified.train");
                 Path destp = dest.toPath();
                 Files.copy(sourcep, destp, StandardCopyOption.REPLACE_EXISTING);
+            }else if(Math.abs(acc - globalBestAcc) < 0.001) {
+                bestIndexes.add(currIndex);
             }
             System.out.println("curr acc was " + acc + " curr best is " + globalBestAcc);
         }
