@@ -119,7 +119,7 @@ public class Test
 //        	level1 = gamesPath + games[i] + "_lvl" + levelIdx +".txt";
 //        	ArcadeMachine.runGames(game, new String[]{level1}, M, sampleMCTSController, null);
 //        }
-	
+
         //5. This starts a game, in a generated level created by a specific level generator
 
         //if(ArcadeMachine.generateOneLevel(game, randomLevelGenerator, recordLevelFile)){
