@@ -9,6 +9,17 @@ import java.util.Random;
 import core.ArcadeMachine;
 import tools.StatSummary;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Diego
@@ -98,7 +109,7 @@ public class Test
 
 	}
         */
-	
+
 	// 1. This starts a game, in a level, played by a human.
 	//    ArcadeMachine.playOneGame(game, level1, recordActionsFile, seed);
 
