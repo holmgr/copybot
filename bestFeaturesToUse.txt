@@ -20,3 +20,602 @@ blockSize
 numMovableSprites
 isUseAvailable
 numImmovableSprites
+
+// NEWER (saving multiple indices) //
+
+
+Best acc was 41.66666666666667
+Using index 799
+numPlayerSprites
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numTypesResourcesAvatar
+blockSize
+numPortals
+
+Best acc was 41.66666666666667
+Using index 923
+numPlayerSprites
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 2963
+numPlayerSprites
+numNPC
+numPortalTypes
+numTypesResources
+isResourcesAvailable
+blockSize
+numPortals
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 2967
+numPlayerSprites
+numNPC
+numPortalTypes
+numTypesResources
+isResourcesAvailable
+blockSize
+numPortals
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 3335
+numPlayerSprites
+numNPC
+numPortalTypes
+numTypesResources
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 8719
+numPlayerSprites
+numNPC
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 9119
+numPlayerSprites
+numNPC
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+blockSize
+numPortals
+
+Best acc was 41.66666666666667
+Using index 9611
+numPlayerSprites
+numNPC
+numTypesResources
+avatarHasResources
+canShoot
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 11011
+numPlayerSprites
+numNPC
+numTypesResources
+isResourcesAvailable
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 17051
+numPlayerSprites
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numNPCTypes
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 17291
+numPlayerSprites
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 19851
+numPlayerSprites
+numPortalTypes
+numTypesResources
+canShoot
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 20123
+numPlayerSprites
+numPortalTypes
+numTypesResources
+numNPCTypes
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 25615
+numPlayerSprites
+numTypesResources
+avatarHasResources
+canShoot
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 26383
+numPlayerSprites
+numTypesResources
+avatarHasResources
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 27915
+numPlayerSprites
+numTypesResources
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 28307
+numPlayerSprites
+numTypesResources
+numNPCTypes
+blockSize
+numPortals
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 28555
+numPlayerSprites
+numTypesResources
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 33175
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+canShoot
+blockSize
+numPortals
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 33439
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numNPCTypes
+blockSize
+numPortals
+
+Best acc was 41.66666666666667
+Using index 33567
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numTypesResourcesAvatar
+blockSize
+numPortals
+
+Best acc was 41.66666666666667
+Using index 33675
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 34067
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 34307
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 34579
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+numTypesResourcesAvatar
+blockSize
+numPortals
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 34715
+numNPC
+numPortalTypes
+numTypesResources
+avatarHasResources
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 35227
+numNPC
+numPortalTypes
+numTypesResources
+isResourcesAvailable
+canShoot
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 35595
+numNPC
+numPortalTypes
+numTypesResources
+isResourcesAvailable
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 35611
+numNPC
+numPortalTypes
+numTypesResources
+isResourcesAvailable
+numTypesResourcesAvatar
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 36099
+numNPC
+numPortalTypes
+numTypesResources
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 36127
+numNPC
+numPortalTypes
+numTypesResources
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+
+Best acc was 41.66666666666667
+Using index 36235
+numNPC
+numPortalTypes
+numTypesResources
+canShoot
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 36487
+numNPC
+numPortalTypes
+numTypesResources
+numNPCTypes
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 41235
+numNPC
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 42523
+numNPC
+numTypesResources
+avatarHasResources
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 42771
+numNPC
+numTypesResources
+avatarHasResources
+numTypesResourcesAvatar
+blockSize
+numPortals
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 43287
+numNPC
+numTypesResources
+isResourcesAvailable
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 43395
+numNPC
+numTypesResources
+isResourcesAvailable
+canShoot
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 43423
+numNPC
+numTypesResources
+isResourcesAvailable
+canShoot
+blockSize
+numPortals
+
+Best acc was 41.66666666666667
+Using index 43543
+numNPC
+numTypesResources
+isResourcesAvailable
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 44303
+numNPC
+numTypesResources
+canShoot
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 44555
+numNPC
+numTypesResources
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 50959
+numPortalTypes
+numTypesResources
+avatarHasResources
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 51087
+numPortalTypes
+numTypesResources
+avatarHasResources
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 52891
+numPortalTypes
+numTypesResources
+numNPCTypes
+blockSize
+numPortals
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 57879
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 58115
+numTypesResources
+avatarHasResources
+isResourcesAvailable
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 58775
+numTypesResources
+avatarHasResources
+canShoot
+blockSize
+numPortals
+isUseAvailable
+
+Best acc was 41.66666666666667
+Using index 60063
+numTypesResources
+isResourcesAvailable
+numNPCTypes
+blockSize
+numPortals
+
+Best acc was 41.66666666666667
+Using index 60931
+numTypesResources
+numNPCTypes
+numTypesResourcesAvatar
+blockSize
+numPortals
+numMovableSprites
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 61071
+numTypesResources
+numNPCTypes
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 61075
+numTypesResources
+numNPCTypes
+blockSize
+numPortals
+isUseAvailable
+canMoveVertically
+
+Best acc was 41.66666666666667
+Using index 62351
+avatarHasResources
+isResourcesAvailable
+blockSize
+numPortals
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 63407
+avatarHasResources
+blockSize
+numMovableSprites
+
+Best acc was 41.66666666666667
+Using index 65433
+blockSize
+numPortals
+canMoveVertically
+numImmovableSprites
+
