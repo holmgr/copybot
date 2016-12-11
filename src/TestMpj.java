@@ -17,8 +17,9 @@ import java.util.stream.Collectors;
 public class TestMpj {
 
     private static final int TRAINING_SET_SIZE = 80;
+    private static final int VALIDATION_SET_SIZE = 12;
     private static final int NUMBER_OF_LEVELS = 5;
-    private static final int NUMBER_OF_TRIES = 1;
+    private static final int NUMBER_OF_TRIES = 5;
 
     public static void main(String[] args) {
 
@@ -42,6 +43,12 @@ public class TestMpj {
                 "sokoban", "solarfox", "superman", "surround", "survivezombies"                 //75-79
         );
 
+        List<String> validationSet = Arrays.asList(
+                "tercio", "thecitadel", "thesnowman",  "waitforbreakfast", "watergame",       //80-84
+                "waves", "whackamole", "wildgunman", "witnessprotection", "wrapsokoban",      //85-89
+                "zelda", "zenpuzzle"                                                          //90,91
+        );
+
         // All controllers to test
         List<String> controllers = Arrays.asList(
                 "controllers.singlePlayer.adrienctx.Agent",
@@ -59,40 +66,35 @@ public class TestMpj {
                 .map(TestMpj::extractControllerName)
                 .collect(Collectors.toList());
 
-        // Calculate the length of the longest controller name
-        int maxNameLength = names
-                .stream()
-                .mapToInt(String::length)
-                .reduce(0, Math::max);
-
 
         MPI.Init(args);
         int me = MPI.COMM_WORLD.Rank();
 
+        for (int round = 0; round < NUMBER_OF_TRIES; round++) {
 
-        // Take out the name for this controller
-        String name = extractControllerName(controllers.get(me));
+            // Take out the name for this controller
+            String name = extractControllerName(controllers.get(me));
 
-        long startTime = System.nanoTime();
-        int[] wins = Test.testController(controllers.get(me), trainingSet, TRAINING_SET_SIZE, NUMBER_OF_LEVELS, NUMBER_OF_TRIES);
+            long startTime = System.nanoTime();
+            int[] wins = Test.testController(controllers.get(me), validationSet, VALIDATION_SET_SIZE, NUMBER_OF_LEVELS, NUMBER_OF_TRIES);
 
-        // Format the result as a space separated string (2 chars per result)
-        String results = Arrays.stream(wins)
-                .mapToObj(res -> String.format("%4d", res))
-                .reduce("", String::concat);
+            // Format the result as a space separated string (2 chars per result)
+            String results = Arrays.stream(wins)
+                    .mapToObj(res -> String.format("%4d", res))
+                    .reduce("", String::concat);
 
-        int totalWins = Arrays.stream(wins).sum();
+            // Write results to file
+            Path file = Paths.get(String.format("validation-%s%d.txt", names.get(me), round));
+            try {
+                Files.write(file, Collections.singletonList(String.format("%s\n", results)), Charset.forName("UTF-8"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        // Write results to file
-        Path file = Paths.get(String.format("%s.txt", names.get(me)));
-        try {
-            Files.write(file, Collections.singletonList(String.format("%" + maxNameLength + "s:\t%s\t%s\n", name, results, totalWins)), Charset.forName("UTF-8"));
-        } catch (IOException e) {
-            e.printStackTrace();
+            long duration = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - startTime);
+            System.out.printf("Finished validating controller: %s took %d seconds\n", name, duration);
         }
 
-        long duration = TimeUnit.NANOSECONDS.toSeconds(System.nanoTime() - startTime);
-        System.out.printf("Finished testing controller: %s took %d seconds\n", name, duration);
         MPI.Finalize();
     }
 
