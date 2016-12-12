@@ -30,6 +30,13 @@ public class Agent extends AbstractPlayer {
 	put(3, "NovTea");
     }};
 
+    HashMap<Integer, Integer> classificationCertainyIndexMap = new HashMap<Integer, Integer>() {{
+	put(0, 1);
+    	put(1, 4);
+    	put(2, 2);
+    	put(3, 3);
+        }};
+
     // Selected agent from portfolio
     private AbstractPlayer chosenAgent = null;
 
@@ -84,12 +91,13 @@ public class Agent extends AbstractPlayer {
 	    String[] splitted = line.split(" ");
 	    Double classDouble = Double.parseDouble(splitted[0]);
 	    controllerClass = classDouble.intValue();
-	    classificationCertainty = Double.parseDouble(splitted[controllerClass +1]);
+	    classificationCertainty = Double.parseDouble(splitted[classificationCertainyIndexMap.get(controllerClass)]);
 	}
 	catch (Exception e) {
 	    System.out.println(String.format("Got Exception: %s", e));
 	}
-	System.out.println("Choosing controller " + controllersMap.get(controllerClass) + " with certainty " + classificationCertainty *100+"%");
+	System.out.println("Choosing controller " + controllersMap.get(controllerClass) + " with certainty "
+			   + classificationCertainty *100+"%");
 	switch (controllerClass) {
 	    case 0:
 		chosenAgent = new controllers.singlePlayer.YOLOBOT.Agent(so, elapsedTimer);
