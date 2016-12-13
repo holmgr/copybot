@@ -74,7 +74,7 @@ public class Agent extends AbstractPlayer {
 	    detectFeatures(so);
 	}
 	try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-		new FileOutputStream(FILENAME, true), "utf-8")))
+		new FileOutputStream(FILENAME, false), "utf-8")))
 	{
 	    writer.write(features.toString() + "\n");
 	}

@@ -77,6 +77,8 @@ public class Agent extends AbstractPlayer {
 		if(i == 0) writer.write((i+1)+ ":" + result);
 		else writer.write(" "+ (i+1) + ":" + result);
 	    }
+	    writer.flush();
+	    writer.close();
 	}
 	catch (Exception e){
 	    System.out.println(String.format("Got Exception: %s", e));
@@ -88,6 +90,9 @@ public class Agent extends AbstractPlayer {
 	    // ignore first line
 	    String dummyString = reader.readLine();
 	    String line = reader.readLine();
+
+	    System.out.println(line);
+
 	    String[] splitted = line.split(" ");
 	    Double classDouble = Double.parseDouble(splitted[0]);
 	    controllerClass = classDouble.intValue();
