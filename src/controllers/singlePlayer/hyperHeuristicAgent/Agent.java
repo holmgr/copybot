@@ -30,7 +30,7 @@ public class Agent extends AbstractPlayer {
     private final static String SVM_MODEL_FILENAME = "classify.model";
     private final static String CLASSIFIED_RESULT = "controller.ans";
     HashMap<Integer, String> controllersMap = new HashMap<Integer, String>() {{
-        put(0,"Yolobot");
+        put(0, "Yolobot");
         put(1, "YBCriber");
         put(2, "thorbjrn");
         put(3, "NovTea");
@@ -46,11 +46,11 @@ public class Agent extends AbstractPlayer {
 
     /**
      * Public constructor with state observation and time due.
-     * @param so state observation of the current game.
+     *
+     * @param so           state observation of the current game.
      * @param elapsedTimer Timer for the controller creation.
      */
-    public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer) throws IOException
-    {
+    public Agent(StateObservation so, ElapsedCpuTimer elapsedTimer) throws IOException {
         StateObservation obsCopy = so.copy();
         final controllers.singlePlayer.featureCollectingAgent.Agent featureCollectingAgent =
                 new controllers.singlePlayer.featureCollectingAgent.Agent(obsCopy, elapsedTimer);
@@ -72,8 +72,7 @@ public class Agent extends AbstractPlayer {
         // write features to file for classification
         // TODO check that the ordering of features is correct
         try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(FEATURES_FILENAME), "utf-8")))
-        {
+                new FileOutputStream(FEATURES_FILENAME), "utf-8"))) {
             // write arbitrary number larger than number of classes for SVM to not take this as a training example
             writer.write(ARBITRARY_NUMBER + " ");
             String[] splittedOnSpace = featureString.split(" ");
@@ -81,14 +80,15 @@ public class Agent extends AbstractPlayer {
                 String[] splittedOnEqual = splittedOnSpace[i].split("=");
                 String[] splittedOnDot = splittedOnEqual[1].split("\\.");
                 String result = splittedOnDot[0];
-                if(i == 0) writer.write((i+1)+ ":" + result);
-                else writer.write(" "+ (i+1) + ":" + result);
+                if (i == 0) writer.write((i + 1) + ":" + result);
+                else writer.write(" " + (i + 1) + ":" + result);
             }
-        }
-        catch (Exception e){
+            writer.flush();
+            writer.close();
+        } catch (Exception e) {
             System.out.println(String.format("Got Exception: %s", e));
         }
-        svm_predict.main(new String[]{ "-b", "1", FEATURES_FILENAME, SVM_MODEL_FILENAME, CLASSIFIED_RESULT });
+        svm_predict.main(new String[]{"-b", "1", FEATURES_FILENAME, SVM_MODEL_FILENAME, CLASSIFIED_RESULT});
         int controllerClass = -1;
         double classificationCertainty = -1.0;
         try (BufferedReader reader = new BufferedReader(new FileReader(CLASSIFIED_RESULT))) {
@@ -99,12 +99,11 @@ public class Agent extends AbstractPlayer {
             Double classDouble = Double.parseDouble(splitted[0]);
             controllerClass = classDouble.intValue();
             classificationCertainty = Double.parseDouble(splitted[classificationCertainyIndexMap.get(controllerClass)]);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(String.format("Got Exception: %s", e));
         }
         System.out.println("Choosing controller " + controllersMap.get(controllerClass) + " with certainty "
-                + classificationCertainty *100+"%");
+                + classificationCertainty * 100 + "%");
         switch (controllerClass) {
             case 0:
                 chosenAgent = new controllers.singlePlayer.YOLOBOT.Agent(so, elapsedTimer);
@@ -127,23 +126,25 @@ public class Agent extends AbstractPlayer {
     /**
      * Picks an action. This function is called every game step to request an
      * action from the player.
-     * @param stateObs Observation of the current state.
+     *
+     * @param stateObs     Observation of the current state.
      * @param elapsedTimer Timer when the action returned is due.
      * @return An action for the current state
      */
-    @Override public ACTIONS act(final StateObservation stateObs, final ElapsedCpuTimer elapsedTimer) {
+    @Override
+    public ACTIONS act(final StateObservation stateObs, final ElapsedCpuTimer elapsedTimer) {
         return chosenAgent.act(stateObs, elapsedTimer);
     }
 
     /**
      * Function called when the game is over. This method must finish before CompetitionParameters.TEAR_DOWN_TIME,
-     *  or the agent will be DISQUALIFIED
+     * or the agent will be DISQUALIFIED
+     *
      * @param stateObservation the game state at the end of the game
-     * @param elapsedCpuTimer timer when this method is meant to finish.
+     * @param elapsedCpuTimer  timer when this method is meant to finish.
      */
-    public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer)
-    {
-//        System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
+    public void result(StateObservation stateObservation, ElapsedCpuTimer elapsedCpuTimer) {
+        // System.out.println("MCTS avg iters: " + SingleMCTSPlayer.iters / SingleMCTSPlayer.num);
         //Include your code here to know how it all ended.
         //System.out.println("Game over? " + stateObservation.isGameOver());
     }
